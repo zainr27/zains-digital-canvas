@@ -25,7 +25,7 @@ const Index = () => {
         <Hero />
       </motion.div>
       
-      <div className="space-y-20 lg:space-y-32">
+      <div className="space-y-0">
         <About />
         <Experience />
         <Projects />
@@ -33,8 +33,8 @@ const Index = () => {
         <Contact />
       </div>
       
-      <footer className={`py-8 text-center border-t ${
-        isDark ? 'border-gray-800 text-gray-400' : 'border-gray-200 text-gray-600'
+      <footer className={`py-8 text-center border-t backdrop-blur-md ${
+        isDark ? 'border-gray-800/50 text-gray-400 bg-gray-900/80' : 'border-gray-200/50 text-gray-600 bg-white/80'
       }`}>
         <div className="container mx-auto px-4">
           <p>&copy; 2024 Zain Rahman. All rights reserved.</p>

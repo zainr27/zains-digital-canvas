@@ -51,7 +51,9 @@ const Experience = () => {
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
 
   return (
-    <section id="experience" className="py-20">
+    <section id="experience" className={`py-20 backdrop-blur-sm ${
+      isDark ? 'bg-gray-800/20' : 'bg-gray-100/20'
+    }`}>
       <div className="container mx-auto px-4">
         <motion.div
           ref={ref}
@@ -73,11 +75,11 @@ const Experience = () => {
                 initial={{ opacity: 0, x: -50 }}
                 animate={isInView ? { opacity: 1, x: 0 } : {}}
                 transition={{ duration: 0.8, delay: index * 0.1 }}
-                className={`p-6 rounded-lg border transition-all duration-300 cursor-pointer ${
+                className={`p-6 rounded-lg border backdrop-blur-md transition-all duration-300 cursor-pointer ${
                   isDark 
-                    ? 'bg-gray-800 border-gray-700 hover:bg-gray-750' 
-                    : 'bg-white border-gray-200 hover:shadow-lg'
-                } ${expandedIndex === index ? 'shadow-xl' : ''}`}
+                    ? 'bg-gray-800/40 border-gray-700/50 hover:bg-gray-700/50' 
+                    : 'bg-white/40 border-gray-200/50 hover:bg-white/60'
+                } ${expandedIndex === index ? 'shadow-xl' : 'shadow-lg'}`}
                 onClick={() => setExpandedIndex(expandedIndex === index ? null : index)}
                 whileHover={{ y: -4 }}
               >

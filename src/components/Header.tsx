@@ -20,8 +20,8 @@ const Header = () => {
       animate={{ y: 0 }}
       className={`fixed top-0 w-full z-50 backdrop-blur-md border-b transition-all duration-300 ${
         isDark 
-          ? 'bg-gray-900/80 border-gray-800' 
-          : 'bg-white/80 border-gray-200'
+          ? 'bg-gray-900/60 border-gray-800/50' 
+          : 'bg-white/60 border-gray-200/50'
       }`}
     >
       <div className="container mx-auto px-4 py-4">
@@ -52,8 +52,10 @@ const Header = () => {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
             onClick={toggleTheme}
-            className={`p-2 rounded-full transition-colors ${
-              isDark ? 'bg-gray-800 text-yellow-400' : 'bg-gray-100 text-gray-600'
+            className={`p-2 rounded-full backdrop-blur-md border transition-colors ${
+              isDark 
+                ? 'bg-gray-800/60 border-gray-700/50 text-yellow-400' 
+                : 'bg-gray-100/60 border-gray-200/50 text-gray-600'
             }`}
           >
             {isDark ? <Sun size={20} /> : <Moon size={20} />}

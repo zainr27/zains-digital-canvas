@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
@@ -36,7 +35,9 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-20">
+    <section id="contact" className={`py-20 backdrop-blur-sm ${
+      isDark ? 'bg-gray-900/30' : 'bg-white/30'
+    }`}>
       <div className="container mx-auto px-4">
         <motion.div
           ref={ref}
@@ -57,6 +58,11 @@ const Contact = () => {
               initial={{ opacity: 0, x: -50 }}
               animate={isInView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.2 }}
+              className={`p-6 rounded-lg backdrop-blur-md border ${
+                isDark 
+                  ? 'bg-gray-800/40 border-gray-700/50' 
+                  : 'bg-white/40 border-gray-200/50'
+              }`}
             >
               <h3 className={`text-2xl font-bold mb-6 ${
                 isDark ? 'text-white' : 'text-gray-900'
@@ -105,6 +111,11 @@ const Contact = () => {
               initial={{ opacity: 0, x: 50 }}
               animate={isInView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.4 }}
+              className={`p-6 rounded-lg backdrop-blur-md border ${
+                isDark 
+                  ? 'bg-gray-800/40 border-gray-700/50' 
+                  : 'bg-white/40 border-gray-200/50'
+              }`}
             >
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>

@@ -54,7 +54,9 @@ const Skills = () => {
   const isInView = useInView(ref, { once: true });
 
   return (
-    <section id="skills" className="py-20">
+    <section id="skills" className={`py-20 backdrop-blur-sm ${
+      isDark ? 'bg-gray-800/20' : 'bg-gray-100/20'
+    }`}>
       <div className="container mx-auto px-4">
         <motion.div
           ref={ref}
@@ -76,8 +78,10 @@ const Skills = () => {
                 initial={{ opacity: 0, x: categoryIndex % 2 === 0 ? -50 : 50 }}
                 animate={isInView ? { opacity: 1, x: 0 } : {}}
                 transition={{ duration: 0.8, delay: categoryIndex * 0.1 }}
-                className={`p-6 rounded-lg ${
-                  isDark ? 'bg-gray-800' : 'bg-white'
+                className={`p-6 rounded-lg backdrop-blur-md border ${
+                  isDark 
+                    ? 'bg-gray-800/40 border-gray-700/50' 
+                    : 'bg-white/40 border-gray-200/50'
                 } shadow-lg`}
               >
                 <h3 className={`text-xl font-bold mb-6 ${

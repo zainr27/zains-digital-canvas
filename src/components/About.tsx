@@ -44,7 +44,9 @@ const About = () => {
   }, [isInView]);
 
   return (
-    <section id="about" className="py-20">
+    <section id="about" className={`py-20 backdrop-blur-sm ${
+      isDark ? 'bg-gray-900/30' : 'bg-white/30'
+    }`}>
       <div className="container mx-auto px-4">
         <motion.div
           ref={ref}
@@ -79,8 +81,10 @@ const About = () => {
                 initial={{ opacity: 0, y: 30 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.8, delay: index * 0.1 }}
-                className={`p-6 rounded-lg ${
-                  isDark ? 'bg-gray-800' : 'bg-white'
+                className={`p-6 rounded-lg backdrop-blur-md border ${
+                  isDark 
+                    ? 'bg-gray-800/40 border-gray-700/50' 
+                    : 'bg-white/40 border-gray-200/50'
                 } shadow-lg`}
               >
                 <div className="text-3xl md:text-4xl font-bold text-indigo-600 mb-2">

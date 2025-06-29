@@ -55,7 +55,9 @@ const Projects = () => {
   const [selectedProject, setSelectedProject] = useState<typeof projects[0] | null>(null);
 
   return (
-    <section id="projects" className="py-20">
+    <section id="projects" className={`py-20 backdrop-blur-sm ${
+      isDark ? 'bg-gray-900/30' : 'bg-white/30'
+    }`}>
       <div className="container mx-auto px-4">
         <motion.div
           ref={ref}
@@ -77,8 +79,10 @@ const Projects = () => {
                 initial={{ opacity: 0, y: 50 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.8, delay: index * 0.1 }}
-                className={`group cursor-pointer rounded-lg overflow-hidden transition-all duration-300 ${
-                  isDark ? 'bg-gray-800' : 'bg-white'
+                className={`group cursor-pointer rounded-lg overflow-hidden transition-all duration-300 backdrop-blur-md border ${
+                  isDark 
+                    ? 'bg-gray-800/40 border-gray-700/50 hover:bg-gray-700/50' 
+                    : 'bg-white/40 border-gray-200/50 hover:bg-white/60'
                 } shadow-lg hover:shadow-xl`}
                 whileHover={{ y: -8 }}
                 onClick={() => setSelectedProject(project)}
@@ -134,15 +138,17 @@ const Projects = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/80 flex items-center justify-center p-4 z-50"
+            className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 z-50"
             onClick={() => setSelectedProject(null)}
           >
             <motion.div
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.8, opacity: 0 }}
-              className={`max-w-2xl w-full rounded-lg overflow-hidden ${
-                isDark ? 'bg-gray-800' : 'bg-white'
+              className={`max-w-2xl w-full rounded-lg overflow-hidden backdrop-blur-md border ${
+                isDark 
+                  ? 'bg-gray-800/90 border-gray-700/50' 
+                  : 'bg-white/90 border-gray-200/50'
               }`}
               onClick={(e) => e.stopPropagation()}
             >
