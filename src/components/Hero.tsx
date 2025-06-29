@@ -9,8 +9,16 @@ const Hero = () => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
-      {/* Animated gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-teal-400 via-indigo-600 to-purple-700 opacity-90" />
+      {/* Rice University background image */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: `url('/lovable-uploads/0e0050e0-21a0-404c-b4d5-8b3a3cf0e8b8.png')`
+        }}
+      />
+      
+      {/* Animated gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-br from-teal-400/80 via-indigo-600/80 to-purple-700/80" />
       
       {/* Animated particles */}
       <div className="absolute inset-0">
