@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
@@ -9,38 +8,43 @@ const experiences = [
   {
     title: 'AI Architect Intern',
     company: 'U.S. Department of Treasury',
-    period: '2024',
-    description: 'Architected machine learning pipelines for financial compliance systems.',
+    location: 'Washington, DC',
+    period: 'June 2025 – Present',
+    description: 'Engineered multi-tenant SaaS compliance platform hosted on Azure Government.',
     details: [
-      'Designed and implemented ML models for fraud detection with 92% accuracy',
-      'Built automated data processing pipelines handling 1M+ transactions daily',
-      'Reduced manual review time by 40% through intelligent classification systems'
+      'Engineered multi-tenant SaaS compliance platform hosted on Azure Government using Azure Foundry',
+      'Implemented private vector databases per tenant for isolated embeddings',
+      'Developed AI modules automating SSP drafting and recommendation compliant with FedRAMP and CMMC'
     ],
-    tech: ['Python', 'TensorFlow', 'AWS', 'Docker']
+    tech: ['Azure', 'Python', 'Vector Databases', 'FedRAMP']
   },
   {
-    title: 'Research Assistant',
-    company: 'Rice Civil & Environmental Engineering',
-    period: '2023-2024',
-    description: 'Developed predictive models for infrastructure optimization.',
+    title: 'Undergraduate Research Assistant',
+    company: 'Rice Civil and Environmental Engineering',
+    location: 'Houston, TX',
+    period: 'Sep 2024 - Present',
+    description: 'Only undergraduate in team of 8 selected to be part of NSF-Funded Research Lab.',
     details: [
-      'Created dGEVNet neural network for extreme weather prediction',
-      'Improved prediction accuracy by 15% over existing methods',
-      'Published research in peer-reviewed conferences'
+      'Only undergraduate in team of 8 selected to be part of NSF-Funded Research Lab',
+      'Built and trained LSTM and dGEVnet models utilizing PyTorch to enhance hydrologic forecasts',
+      'Integrated GIS datasets to map regional patterns; reduced preprocessing time by 30%',
+      'Led model validation and achieved a 15% improvement in accuracy on out-of-sample precipitation events'
     ],
-    tech: ['PyTorch', 'MATLAB', 'R', 'Git']
+    tech: ['PyTorch', 'LSTM', 'GIS', 'Python']
   },
   {
-    title: 'Co-Founder & Software Engineer',
+    title: 'Co-Founder and Founding Software Engineer',
     company: 'QuikFlip',
-    period: '2022-Present',
-    description: 'Building the future of real estate investment technology.',
+    location: 'Houston, TX',
+    period: 'Jul 2024 - Mar 2025',
+    description: 'Built full-stack crypto payments app using React, AWS Lambda, and S3.',
     details: [
-      'Led full-stack development of property analysis platform',
-      'Secured $50K in pre-seed funding from angel investors',
-      'Grew user base to 500+ active real estate professionals'
+      'Built full-stack crypto payments app using React, AWS Lambda, and S3; developed backend conversion logic',
+      'Set up CI/CD deployment pipeline via AWS CodePipeline and CloudWatch for automatic monitoring',
+      'Wrote Postman test suites for API endpoints; ensured response latency stayed under 200ms',
+      'Raised $30,000 pre-seed from Jefferson Foundation to scale MVP to market and YC Top 10%'
     ],
-    tech: ['React', 'Node.js', 'PostgreSQL', 'GCP']
+    tech: ['React', 'AWS Lambda', 'S3', 'CodePipeline']
   }
 ];
 
@@ -92,7 +96,7 @@ const Experience = () => {
                     </h3>
                     <p className="text-indigo-600 font-semibold">{exp.company}</p>
                     <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
-                      {exp.period}
+                      {exp.location} • {exp.period}
                     </p>
                   </div>
                   <motion.div
