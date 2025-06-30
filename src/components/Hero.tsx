@@ -7,6 +7,15 @@ import { useTheme } from '../contexts/ThemeContext';
 const Hero = () => {
   const { isDark } = useTheme();
 
+  const handleResumeDownload = () => {
+    const link = document.createElement('a');
+    link.href = '/ZainT25 copy.pdf';
+    link.download = 'Zain_Rahman_Resume.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
       {/* Rice University background image */}
@@ -71,6 +80,7 @@ const Hero = () => {
           <motion.button
             whileHover={{ scale: 1.05, x: 4 }}
             whileTap={{ scale: 0.95 }}
+            onClick={handleResumeDownload}
             className="bg-yellow-400 text-gray-900 px-8 py-3 rounded-full font-semibold flex items-center justify-center gap-2 hover:bg-yellow-300 transition-colors"
           >
             <Download size={20} />
