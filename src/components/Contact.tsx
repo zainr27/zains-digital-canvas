@@ -85,7 +85,7 @@ const Contact = () => {
                 x: 8
               }} className={`flex items-center space-x-4 p-4 rounded-lg transition-colors ${isDark ? 'text-gray-300 hover:bg-gray-800' : 'text-gray-600 hover:bg-gray-100'}`}>
                   <Phone className="text-indigo-600" size={24} />
-                  <span>+1 (234) 567-8900</span>
+                  <span>+1 (571) 665-8984</span>
                 </motion.a>
               </div>
             </motion.div>
