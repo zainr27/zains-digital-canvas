@@ -88,7 +88,7 @@ const Hero = () => {
             whileHover={{ scale: 1.05, x: 4 }}
             whileTap={{ scale: 0.95 }}
             onClick={handleResumeDownload}
-            className="bg-yellow-400 text-gray-900 px-8 py-3 rounded-full font-semibold flex items-center justify-center gap-2 hover:bg-yellow-300 transition-colors"
+            className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-8 py-3 rounded-full font-semibold flex items-center justify-center gap-2 hover:from-blue-600 hover:to-indigo-700 transition-all duration-300 shadow-lg hover:shadow-xl"
           >
             <Download size={20} />
             Download Resume
