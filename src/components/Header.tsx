@@ -33,7 +33,7 @@ const Header = () => {
           {/* Logo */}
           <motion.div 
             whileHover={{ scale: 1.05 }}
-            className="text-xl font-bold bg-gradient-to-r from-teal-400 to-indigo-600 bg-clip-text text-transparent w-16 flex-shrink-0"
+            className="text-xl font-bold bg-gradient-to-r from-blue-400 to-indigo-600 bg-clip-text text-transparent w-16 flex-shrink-0"
           >
             ZR
           </motion.div>
