@@ -92,18 +92,34 @@ All colors MUST be HSL.
 @layer base {
   * {
     @apply border-border;
+    /* Ensure no element creates horizontal overflow */
+    box-sizing: border-box;
+  }
+
+  html, body {
+    /* Prevent horizontal scrolling completely */
+    overflow-x: hidden;
+    width: 100%;
+    margin: 0;
+    padding: 0;
   }
 
   body {
     @apply bg-background text-foreground font-sans;
     font-feature-settings: "rlig" 1, "calt" 1;
-    /* Prevent horizontal scrolling on mobile */
-    overflow-x: hidden;
     /* Enable smooth scrolling */
     scroll-behavior: smooth;
     /* Improve text rendering on mobile */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+  
+  /* Ensure root div takes full width without any margins */
+  #root {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
   }
   
   h1, h2, h3, h4, h5, h6 {
@@ -145,6 +161,7 @@ html {
   scroll-behavior: smooth;
   /* Prevent horizontal scroll */
   overflow-x: hidden;
+  width: 100%;
 }
 
 /* Custom scrollbar - hide on mobile for better UX */
@@ -222,9 +239,14 @@ html {
 /* Improve performance on mobile */
 @media (max-width: 768px) {
   * {
-    /* Reduce GPU usage on mobile */
+    /* Reduce GPU usage on mobile but prevent horizontal overflow */
     transform: translateZ(0);
     backface-visibility: hidden;
     perspective: 1000px;
   }
+}
+
+/* Additional overflow protection */
+.container, main, section, div {
+  overflow-x: hidden;
 }
