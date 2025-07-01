@@ -75,7 +75,7 @@ const Hero = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="text-lg md:text-xl mb-7 text-gray-100"
         >
-          Engineering AI-first solutions for real-world impact
+          Rising Junior at Rice University majoring in Computer Science 
         </motion.p>
         
         <motion.div 
