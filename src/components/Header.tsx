@@ -1,5 +1,4 @@
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Moon, Sun, Menu, X, Github, Linkedin, Twitter } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '../contexts/ThemeContext';
@@ -7,6 +6,25 @@ import { useTheme } from '../contexts/ThemeContext';
 const Header = () => {
   const { isDark, toggleTheme } = useTheme();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [currentDate, setCurrentDate] = useState('');
+
+  useEffect(() => {
+    const updateDate = () => {
+      const now = new Date();
+      const estDate = new Intl.DateTimeFormat('en-US', {
+        timeZone: 'America/New_York',
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric'
+      }).format(now);
+      setCurrentDate(estDate);
+    };
+
+    updateDate();
+    const interval = setInterval(updateDate, 60000); // Update every minute
+
+    return () => clearInterval(interval);
+  }, []);
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -30,13 +48,18 @@ const Header = () => {
     >
       <div className="container mx-auto px-6 py-4">
         <div className="flex justify-between items-center">
-          {/* Logo */}
-          <motion.div 
-            whileHover={{ scale: 1.05 }}
-            className="text-xl font-bold bg-gradient-to-r from-blue-400 to-indigo-600 bg-clip-text text-transparent w-16 flex-shrink-0"
-          >
-            ZR
-          </motion.div>
+          {/* Logo with Date */}
+          <div className="flex items-center gap-3">
+            <motion.div 
+              whileHover={{ scale: 1.05 }}
+              className="text-xl font-bold bg-gradient-to-r from-blue-400 to-indigo-600 bg-clip-text text-transparent"
+            >
+              ZR
+            </motion.div>
+            <div className={`text-sm font-medium ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+              {currentDate}
+            </div>
+          </div>
           
           {/* Desktop Navigation - Centered */}
           <nav className="hidden md:flex flex-1 justify-center max-w-2xl mx-8">

@@ -1,5 +1,3 @@
-
-
 import React, { useEffect, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
@@ -135,7 +133,7 @@ const About = () => {
             } shadow-lg max-w-2xl mx-auto`}
           >
             <div className={`text-xl font-semibold mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>
-              🎓 Rice University • Computer Science + Business
+              🎓 Rice University • Computer Science + Business Double Major
             </div>
             <div className="flex items-center justify-center gap-2 mb-2">
               <span className={`text-base ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
@@ -156,4 +154,3 @@ const About = () => {
 };
 
 export default About;
-
