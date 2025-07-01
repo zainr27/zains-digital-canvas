@@ -1,4 +1,5 @@
 
+
 import React, { useEffect, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
@@ -127,23 +128,20 @@ const About = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.8 }}
-            className={`p-6 rounded-xl backdrop-blur-md border-2 ${
+            className={`p-6 rounded-lg backdrop-blur-md border ${
               isDark 
-                ? 'bg-gradient-to-r from-indigo-900/40 via-purple-900/40 to-blue-900/40 border-indigo-500/50' 
-                : 'bg-gradient-to-r from-indigo-100/60 via-purple-100/60 to-blue-100/60 border-indigo-400/50'
-            } shadow-xl max-w-2xl mx-auto`}
+                ? 'bg-gray-800/30 border-gray-700/30' 
+                : 'bg-white/30 border-gray-200/30'
+            } shadow-lg max-w-2xl mx-auto`}
           >
-            <div className={`text-2xl md:text-3xl font-bold mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>
-              🎓 Academic Excellence
-            </div>
-            <div className={`text-lg font-semibold mb-3 ${isDark ? 'text-gray-200' : 'text-gray-700'}`}>
-              Rice University • Computer Science + Business
+            <div className={`text-xl font-semibold mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+              🎓 Rice University • Computer Science + Business
             </div>
             <div className="flex items-center justify-center gap-2 mb-2">
-              <span className={`text-lg font-medium ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
-                Current GPA:
+              <span className={`text-base ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+                GPA:
               </span>
-              <span className="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-indigo-600 via-purple-600 to-blue-600 bg-clip-text text-transparent">
+              <span className="text-2xl font-bold text-indigo-600">
                 3.85
               </span>
             </div>
@@ -158,3 +156,4 @@ const About = () => {
 };
 
 export default About;
+
