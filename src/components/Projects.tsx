@@ -29,7 +29,7 @@ const projects = [
   },
   {
     title: 'QuikFlip Platform',
-    description: 'Full-stack crypto payments application for real estate transactions, featuring automated conversion logic and enterprise-grade deployment infrastructure.',
+    description: 'Full-stack crypto payments application for SMBs, featuring automated conversion logic and enterprise-grade deployment infrastructure.',
     image: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=800&h=600&fit=crop',
     tech: ['React', 'AWS Lambda', 'AWS S3', 'AWS CodePipeline', 'CloudWatch', 'Postman'],
     github: 'https://github.com/zainr27/myquikflip',
