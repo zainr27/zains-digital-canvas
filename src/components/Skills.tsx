@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
@@ -27,13 +26,14 @@ const skillCategories = [
     ]
   },
   {
-    title: 'Tools & Platforms',
+    title: 'AI Technologies',
     skills: [
-      { name: 'AWS/GCP', level: 85 },
-      { name: 'Docker/Kubernetes', level: 80 },
-      { name: 'Git/GitHub', level: 95 },
-      { name: 'PostgreSQL/MongoDB', level: 85 },
-      { name: 'Linux/Unix', level: 80 }
+      { name: 'Azure AI Foundry', level: 90 },
+      { name: 'LLMs & Fine-tuning', level: 85 },
+      { name: 'AI Agents & Workflows', level: 85 },
+      { name: 'MCP Servers', level: 80 },
+      { name: 'Vector Databases', level: 85 },
+      { name: 'RAG Systems', level: 80 }
     ]
   },
   {
