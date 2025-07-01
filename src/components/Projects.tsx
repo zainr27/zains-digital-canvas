@@ -4,6 +4,7 @@ import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { useRef } from 'react';
 import { ExternalLink, X, Github } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
+import LazyImage from './ui/LazyImage';
 
 const projects = [
   {
@@ -44,10 +45,25 @@ const Projects = () => {
   const isInView = useInView(ref, { once: true });
   const [selectedProject, setSelectedProject] = useState<typeof projects[0] | null>(null);
 
+  const handleKeyDown = (event: React.KeyboardEvent, project: typeof projects[0]) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      setSelectedProject(project);
+    }
+  };
+
+  const handleModalKeyDown = (event: React.KeyboardEvent) => {
+    if (event.key === 'Escape') {
+      setSelectedProject(null);
+    }
+  };
+
   return (
-    <section id="projects" className={`py-20 backdrop-blur-sm ${
-      isDark ? 'bg-gray-900/30' : 'bg-white/30'
-    }`}>
+    <section 
+      id="projects" 
+      className={`py-20 backdrop-blur-sm ${isDark ? 'bg-gray-900/30' : 'bg-white/30'}`}
+      aria-labelledby="projects-heading"
+    >
       <div className="container mx-auto px-4">
         <motion.div
           ref={ref}
@@ -56,13 +72,18 @@ const Projects = () => {
           transition={{ duration: 0.8 }}
           className="max-w-6xl mx-auto"
         >
-          <h2 className={`text-4xl md:text-5xl font-bold text-center mb-16 ${
-            isDark ? 'text-white' : 'text-gray-900'
-          }`}>
+          <h2 
+            id="projects-heading"
+            className={`text-4xl md:text-5xl font-bold text-center mb-16 ${isDark ? 'text-white' : 'text-gray-900'}`}
+          >
             Featured Projects
           </h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div 
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            role="list"
+            aria-label="Featured projects"
+          >
             {projects.map((project, index) => (
               <motion.div
                 key={index}
@@ -73,33 +94,33 @@ const Projects = () => {
                   isDark 
                     ? 'bg-gray-800/40 border-gray-700/50 hover:bg-gray-700/50' 
                     : 'bg-white/40 border-gray-200/50 hover:bg-white/60'
-                } shadow-lg hover:shadow-xl`}
+                } shadow-lg hover:shadow-xl focus-within:ring-2 focus-within:ring-indigo-500`}
                 whileHover={{ y: -8 }}
                 onClick={() => setSelectedProject(project)}
+                onKeyDown={(e) => handleKeyDown(e, project)}
+                tabIndex={0}
+                role="button"
+                aria-label={`View details for ${project.title} project`}
               >
                 <div className="relative overflow-hidden">
-                  <img
+                  <LazyImage
                     src={project.image}
-                    alt={project.title}
+                    alt={`${project.title} project screenshot`}
                     className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
                 
                 <div className="p-6">
-                  <h3 className={`text-xl font-bold mb-2 ${
-                    isDark ? 'text-white' : 'text-gray-900'
-                  }`}>
+                  <h3 className={`text-xl font-bold mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>
                     {project.title}
                   </h3>
                   
-                  <p className={`mb-4 text-sm ${
-                    isDark ? 'text-gray-300' : 'text-gray-600'
-                  }`}>
+                  <p className={`mb-4 text-sm ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
                     {project.description}
                   </p>
                   
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-2" aria-label={`Technologies used in ${project.title}`}>
                     {project.tech.slice(0, 3).map((tech, idx) => (
                       <span
                         key={idx}
@@ -130,6 +151,11 @@ const Projects = () => {
             exit={{ opacity: 0 }}
             className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 z-50"
             onClick={() => setSelectedProject(null)}
+            onKeyDown={handleModalKeyDown}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="modal-title"
+            aria-describedby="modal-description"
           >
             <motion.div
               initial={{ scale: 0.8, opacity: 0 }}
@@ -143,39 +169,39 @@ const Projects = () => {
               onClick={(e) => e.stopPropagation()}
             >
               <div className="relative">
-                <img
+                <LazyImage
                   src={selectedProject.image}
-                  alt={selectedProject.title}
+                  alt={`${selectedProject.title} project detailed screenshot`}
                   className="w-full h-64 object-cover"
                 />
                 <button
                   onClick={() => setSelectedProject(null)}
-                  className="absolute top-4 right-4 p-2 bg-black/50 text-white rounded-full hover:bg-black/70 transition-colors"
+                  className="absolute top-4 right-4 p-2 bg-black/50 text-white rounded-full hover:bg-black/70 transition-colors focus:outline-none focus:ring-2 focus:ring-white"
+                  aria-label="Close project details modal"
                 >
                   <X size={16} />
                 </button>
               </div>
               
               <div className="p-6">
-                <h3 className={`text-2xl font-bold mb-4 ${
-                  isDark ? 'text-white' : 'text-gray-900'
-                }`}>
+                <h3 
+                  id="modal-title"
+                  className={`text-2xl font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}
+                >
                   {selectedProject.title}
                 </h3>
                 
-                <p className={`mb-4 ${
-                  isDark ? 'text-gray-300' : 'text-gray-600'
-                }`}>
-                  {selectedProject.details}
-                </p>
+                <div id="modal-description">
+                  <p className={`mb-4 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+                    {selectedProject.details}
+                  </p>
+                  
+                  <p className={`mb-6 text-sm font-semibold ${isDark ? 'text-indigo-400' : 'text-indigo-600'}`}>
+                    Impact: {selectedProject.impact}
+                  </p>
+                </div>
                 
-                <p className={`mb-6 text-sm font-semibold ${
-                  isDark ? 'text-indigo-400' : 'text-indigo-600'
-                }`}>
-                  Impact: {selectedProject.impact}
-                </p>
-                
-                <div className="flex flex-wrap gap-2 mb-6">
+                <div className="flex flex-wrap gap-2 mb-6" aria-label="All technologies used">
                   {selectedProject.tech.map((tech, idx) => (
                     <span
                       key={idx}
@@ -193,9 +219,10 @@ const Projects = () => {
                     href={selectedProject.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 px-4 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-600 transition-colors"
+                    className="flex items-center gap-2 px-4 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-600 transition-colors focus:outline-none focus:ring-2 focus:ring-gray-500"
+                    aria-label={`View ${selectedProject.title} source code on GitHub`}
                   >
-                    <Github size={16} />
+                    <Github size={16} aria-hidden="true" />
                     GitHub
                   </motion.a>
                   <motion.a
@@ -204,9 +231,10 @@ const Projects = () => {
                     href={selectedProject.demo}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors"
+                    className="flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    aria-label={`View ${selectedProject.title} live demo`}
                   >
-                    <ExternalLink size={16} />
+                    <ExternalLink size={16} aria-hidden="true" />
                     Live Demo
                   </motion.a>
                 </div>

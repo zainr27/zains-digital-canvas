@@ -2,11 +2,13 @@
 import React, { useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { Phone, Send, CheckCircle, AlertCircle, Twitter } from 'lucide-react';
+import { Phone, Send, CheckCircle, AlertCircle, Twitter, Loader } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
+import { useToast } from '../hooks/use-toast';
 
 const Contact = () => {
   const { isDark } = useTheme();
+  const { toast } = useToast();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
   
@@ -16,7 +18,6 @@ const Contact = () => {
     message: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [errors, setErrors] = useState<{[key: string]: string}>({});
 
   const validateForm = () => {
@@ -24,11 +25,13 @@ const Contact = () => {
     
     if (!formData.name.trim()) {
       newErrors.name = 'Name is required';
+    } else if (formData.name.trim().length < 2) {
+      newErrors.name = 'Name must be at least 2 characters long';
     }
     
     if (!formData.email.trim()) {
       newErrors.email = 'Email is required';
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim())) {
       newErrors.email = 'Please enter a valid email address';
     }
     
@@ -36,6 +39,8 @@ const Contact = () => {
       newErrors.message = 'Message is required';
     } else if (formData.message.trim().length < 10) {
       newErrors.message = 'Message must be at least 10 characters long';
+    } else if (formData.message.trim().length > 1000) {
+      newErrors.message = 'Message must be less than 1000 characters';
     }
     
     setErrors(newErrors);
@@ -46,31 +51,51 @@ const Contact = () => {
     e.preventDefault();
     
     if (!validateForm()) {
+      toast({
+        title: "Validation Error",
+        description: "Please fix the errors in the form before submitting.",
+        variant: "destructive",
+      });
       return;
     }
     
     setIsSubmitting(true);
-    setSubmitStatus('idle');
 
     try {
-      // Simulate form submission - In a real app, this would send to your backend
-      // For now, we'll just log the data and show success
-      console.log('Form submitted:', formData);
+      // Simulate form submission with potential network issues
+      console.log('Submitting form:', formData);
       
-      // Simulate API call delay
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      // Simulate network delay and potential failure
+      await new Promise((resolve, reject) => {
+        setTimeout(() => {
+          // Simulate 10% chance of network error
+          if (Math.random() < 0.1) {
+            reject(new Error('Network error: Unable to send message'));
+          } else {
+            resolve(true);
+          }
+        }, Math.random() * 2000 + 1000); // 1-3 second delay
+      });
       
-      // Reset form and show success
+      // Success - Reset form
       setFormData({ name: '', email: '', message: '' });
-      setSubmitStatus('success');
+      setErrors({});
       
-      // Reset success message after 5 seconds
-      setTimeout(() => setSubmitStatus('idle'), 5000);
+      toast({
+        title: "Message Sent Successfully!",
+        description: "Thank you for your message. I'll get back to you within 24 hours.",
+      });
       
     } catch (error) {
-      console.error('Error submitting form:', error);
-      setSubmitStatus('error');
-      setTimeout(() => setSubmitStatus('idle'), 5000);
+      console.error('Form submission error:', error);
+      
+      const errorMessage = error instanceof Error ? error.message : 'An unexpected error occurred';
+      
+      toast({
+        title: "Failed to Send Message",
+        description: `${errorMessage}. Please try again or contact me directly.`,
+        variant: "destructive",
+      });
     } finally {
       setIsSubmitting(false);
     }
@@ -87,7 +112,11 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className={`py-20 backdrop-blur-sm ${isDark ? 'bg-gray-900/30' : 'bg-white/30'}`}>
+    <section 
+      id="contact" 
+      className={`py-20 backdrop-blur-sm ${isDark ? 'bg-gray-900/30' : 'bg-white/30'}`}
+      aria-labelledby="contact-heading"
+    >
       <div className="container mx-auto px-4">
         <motion.div
           ref={ref}
@@ -96,7 +125,10 @@ const Contact = () => {
           transition={{ duration: 0.8 }}
           className="max-w-4xl mx-auto"
         >
-          <h2 className={`text-4xl md:text-5xl font-bold text-center mb-16 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+          <h2 
+            id="contact-heading"
+            className={`text-4xl md:text-5xl font-bold text-center mb-16 ${isDark ? 'text-white' : 'text-gray-900'}`}
+          >
             Let's Connect
           </h2>
           
@@ -107,8 +139,13 @@ const Contact = () => {
               animate={isInView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.2 }}
               className={`p-6 rounded-lg backdrop-blur-md border ${isDark ? 'bg-gray-800/40 border-gray-700/50' : 'bg-white/40 border-gray-200/50'}`}
+              role="complementary"
+              aria-labelledby="contact-info-heading"
             >
-              <h3 className={`text-2xl font-bold mb-6 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+              <h3 
+                id="contact-info-heading"
+                className={`text-2xl font-bold mb-6 ${isDark ? 'text-white' : 'text-gray-900'}`}
+              >
                 Get in Touch
               </h3>
               
@@ -117,15 +154,17 @@ const Contact = () => {
                 Let's discuss how we can work together to create something amazing.
               </p>
               
-              <div className="space-y-4">
+              <div className="space-y-4" role="list" aria-label="Contact methods">
                 <motion.a
                   href="https://x.com/bitacolyte"
                   target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ x: 8 }}
                   className={`flex items-center space-x-4 p-4 rounded-lg transition-colors ${isDark ? 'text-gray-300 hover:bg-gray-800' : 'text-gray-600 hover:bg-gray-100'}`}
+                  role="listitem"
+                  aria-label="Follow me on Twitter/X @bitacolyte"
                 >
-                  <Twitter className="text-indigo-600" size={24} />
+                  <Twitter className="text-indigo-600" size={24} aria-hidden="true" />
                   <span>@bitacolyte</span>
                 </motion.a>
                 
@@ -133,8 +172,10 @@ const Contact = () => {
                   href="tel:+15716658984"
                   whileHover={{ x: 8 }}
                   className={`flex items-center space-x-4 p-4 rounded-lg transition-colors ${isDark ? 'text-gray-300 hover:bg-gray-800' : 'text-gray-600 hover:bg-gray-100'}`}
+                  role="listitem"
+                  aria-label="Call me at +1 (571) 665-8984"
                 >
-                  <Phone className="text-indigo-600" size={24} />
+                  <Phone className="text-indigo-600" size={24} aria-hidden="true" />
                   <span>+1 (571) 665-8984</span>
                 </motion.a>
               </div>
@@ -146,34 +187,32 @@ const Contact = () => {
               animate={isInView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.4 }}
               className={`p-6 rounded-lg backdrop-blur-md border ${isDark ? 'bg-gray-800/40 border-gray-700/50' : 'bg-white/40 border-gray-200/50'}`}
+              role="main"
+              aria-labelledby="contact-form-heading"
             >
-              {/* Status Messages */}
-              {submitStatus === 'success' && (
-                <motion.div
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="mb-6 p-4 bg-green-100 border border-green-300 rounded-lg flex items-center space-x-2 text-green-800"
-                >
-                  <CheckCircle size={20} />
-                  <span>Message sent successfully! I'll get back to you soon.</span>
-                </motion.div>
-              )}
-              
-              {submitStatus === 'error' && (
-                <motion.div
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="mb-6 p-4 bg-red-100 border border-red-300 rounded-lg flex items-center space-x-2 text-red-800"
-                >
-                  <AlertCircle size={20} />
-                  <span>Sorry, there was an error sending your message. Please try again or contact me directly.</span>
-                </motion.div>
-              )}
+              <h3 
+                id="contact-form-heading" 
+                className="sr-only"
+              >
+                Contact Form
+              </h3>
 
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form 
+                onSubmit={handleSubmit} 
+                className="space-y-6"
+                noValidate
+                aria-describedby="form-description"
+              >
+                <p id="form-description" className="sr-only">
+                  Fill out this form to send me a message. All fields are required.
+                </p>
+
                 <div>
-                  <label htmlFor="name" className={`block text-sm font-medium mb-2 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
-                    Name
+                  <label 
+                    htmlFor="name" 
+                    className={`block text-sm font-medium mb-2 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}
+                  >
+                    Name <span aria-label="required">*</span>
                   </label>
                   <input
                     type="text"
@@ -182,21 +221,31 @@ const Contact = () => {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className={`w-full px-4 py-3 rounded-lg border transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 ${
+                    disabled={isSubmitting}
+                    className={`w-full px-4 py-3 rounded-lg border transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed ${
                       errors.name 
-                        ? 'border-red-500' 
+                        ? 'border-red-500 focus:ring-red-500' 
                         : isDark 
                           ? 'bg-gray-800 border-gray-700 text-white' 
                           : 'bg-white border-gray-300 text-gray-900'
                     }`}
                     placeholder="Your name"
+                    aria-invalid={!!errors.name}
+                    aria-describedby={errors.name ? 'name-error' : undefined}
                   />
-                  {errors.name && <p className="mt-1 text-sm text-red-500">{errors.name}</p>}
+                  {errors.name && (
+                    <p id="name-error" className="mt-1 text-sm text-red-500" role="alert">
+                      {errors.name}
+                    </p>
+                  )}
                 </div>
                 
                 <div>
-                  <label htmlFor="email" className={`block text-sm font-medium mb-2 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
-                    Email
+                  <label 
+                    htmlFor="email" 
+                    className={`block text-sm font-medium mb-2 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}
+                  >
+                    Email <span aria-label="required">*</span>
                   </label>
                   <input
                     type="email"
@@ -205,21 +254,31 @@ const Contact = () => {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className={`w-full px-4 py-3 rounded-lg border transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 ${
+                    disabled={isSubmitting}
+                    className={`w-full px-4 py-3 rounded-lg border transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed ${
                       errors.email 
-                        ? 'border-red-500' 
+                        ? 'border-red-500 focus:ring-red-500' 
                         : isDark 
                           ? 'bg-gray-800 border-gray-700 text-white' 
                           : 'bg-white border-gray-300 text-gray-900'
                     }`}
                     placeholder="your.email@example.com"
+                    aria-invalid={!!errors.email}
+                    aria-describedby={errors.email ? 'email-error' : undefined}
                   />
-                  {errors.email && <p className="mt-1 text-sm text-red-500">{errors.email}</p>}
+                  {errors.email && (
+                    <p id="email-error" className="mt-1 text-sm text-red-500" role="alert">
+                      {errors.email}
+                    </p>
+                  )}
                 </div>
                 
                 <div>
-                  <label htmlFor="message" className={`block text-sm font-medium mb-2 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
-                    Message
+                  <label 
+                    htmlFor="message" 
+                    className={`block text-sm font-medium mb-2 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}
+                  >
+                    Message <span aria-label="required">*</span>
                   </label>
                   <textarea
                     id="message"
@@ -227,17 +286,34 @@ const Contact = () => {
                     value={formData.message}
                     onChange={handleChange}
                     required
+                    disabled={isSubmitting}
                     rows={5}
-                    className={`w-full px-4 py-3 rounded-lg border transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 resize-none ${
+                    maxLength={1000}
+                    className={`w-full px-4 py-3 rounded-lg border transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 resize-none disabled:opacity-50 disabled:cursor-not-allowed ${
                       errors.message 
-                        ? 'border-red-500' 
+                        ? 'border-red-500 focus:ring-red-500' 
                         : isDark 
                           ? 'bg-gray-800 border-gray-700 text-white' 
                           : 'bg-white border-gray-300 text-gray-900'
                     }`}
                     placeholder="Tell me about your project or idea..."
+                    aria-invalid={!!errors.message}
+                    aria-describedby={errors.message ? 'message-error message-count' : 'message-count'}
                   />
-                  {errors.message && <p className="mt-1 text-sm text-red-500">{errors.message}</p>}
+                  <div className="flex justify-between items-center mt-1">
+                    {errors.message && (
+                      <p id="message-error" className="text-sm text-red-500" role="alert">
+                        {errors.message}
+                      </p>
+                    )}
+                    <p 
+                      id="message-count" 
+                      className={`text-sm ml-auto ${isDark ? 'text-gray-400' : 'text-gray-500'}`}
+                      aria-live="polite"
+                    >
+                      {formData.message.length}/1000
+                    </p>
+                  </div>
                 </div>
                 
                 <motion.button
@@ -245,24 +321,24 @@ const Contact = () => {
                   disabled={isSubmitting}
                   whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
                   whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
-                  className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-3 px-6 rounded-lg font-semibold flex items-center justify-center space-x-2 hover:from-indigo-700 hover:to-purple-700 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-3 px-6 rounded-lg font-semibold flex items-center justify-center space-x-2 hover:from-indigo-700 hover:to-purple-700 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                  aria-describedby="submit-button-description"
                 >
                   {isSubmitting ? (
                     <>
-                      <motion.div
-                        animate={{ rotate: 360 }}
-                        transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                        className="w-5 h-5 border-2 border-white border-t-transparent rounded-full"
-                      />
+                      <Loader className="animate-spin" size={18} aria-hidden="true" />
                       <span>Sending...</span>
                     </>
                   ) : (
                     <>
-                      <Send size={18} />
+                      <Send size={18} aria-hidden="true" />
                       <span>Send Message</span>
                     </>
                   )}
                 </motion.button>
+                <p id="submit-button-description" className="sr-only">
+                  {isSubmitting ? 'Message is being sent' : 'Click to send your message'}
+                </p>
               </form>
             </motion.div>
           </div>

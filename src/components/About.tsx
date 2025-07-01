@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { useTheme } from '../contexts/ThemeContext';
+import LazyImage from './ui/LazyImage';
 
 const About = () => {
   const { isDark } = useTheme();
@@ -44,9 +45,11 @@ const About = () => {
   }, [isInView]);
 
   return (
-    <section id="about" className={`py-20 backdrop-blur-sm ${
-      isDark ? 'bg-gray-900/30' : 'bg-white/30'
-    }`}>
+    <section 
+      id="about" 
+      className={`py-20 backdrop-blur-sm ${isDark ? 'bg-gray-900/30' : 'bg-white/30'}`}
+      aria-labelledby="about-heading"
+    >
       <div className="container mx-auto px-4">
         <motion.div
           ref={ref}
@@ -55,9 +58,10 @@ const About = () => {
           transition={{ duration: 0.8 }}
           className="max-w-4xl mx-auto text-center"
         >
-          <h2 className={`text-4xl md:text-5xl font-bold mb-8 ${
-            isDark ? 'text-white' : 'text-gray-900'
-          }`}>
+          <h2 
+            id="about-heading"
+            className={`text-4xl md:text-5xl font-bold mb-8 ${isDark ? 'text-white' : 'text-gray-900'}`}
+          >
             About Me
           </h2>
           
@@ -69,24 +73,26 @@ const About = () => {
             className="mb-8"
           >
             <div className="w-48 h-48 mx-auto rounded-full overflow-hidden border-4 border-indigo-600 shadow-xl">
-              <img
+              <LazyImage
                 src="/lovable-uploads/1e158626-7ba5-4d11-8ce7-e647c3c6c77e.png"
-                alt="Zain Rahman - Professional Headshot"
+                alt="Zain Rahman - Professional headshot of a young computer science student at Rice University"
                 className="w-full h-full object-cover"
               />
             </div>
           </motion.div>
           
-          <p className={`text-lg md:text-xl mb-12 leading-relaxed ${
-            isDark ? 'text-gray-300' : 'text-gray-600'
-          }`}>
+          <p className={`text-lg md:text-xl mb-12 leading-relaxed ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
             Houston-based CS + Business student at Rice University, passionate about building 
             AI-driven solutions that create measurable impact. As a co-founder and AI architect, 
             I bridge the gap between cutting-edge technology and real-world applications, 
             turning complex problems into elegant, scalable solutions.
           </p>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+          <div 
+            className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12"
+            role="list"
+            aria-label="Professional statistics"
+          >
             {[
               { label: 'Years Coding', value: counts.experience, suffix: '+' },
               { label: 'Projects Shipped', value: counts.projects, suffix: '+' },
@@ -102,13 +108,15 @@ const About = () => {
                     ? 'bg-gray-800/40 border-gray-700/50' 
                     : 'bg-white/40 border-gray-200/50'
                 } shadow-lg`}
+                role="listitem"
               >
-                <div className="text-3xl md:text-4xl font-bold text-indigo-600 mb-2">
+                <div 
+                  className="text-3xl md:text-4xl font-bold text-indigo-600 mb-2"
+                  aria-label={`${stat.value}${stat.suffix} ${stat.label}`}
+                >
                   {stat.value}{stat.suffix}
                 </div>
-                <div className={`text-sm font-medium ${
-                  isDark ? 'text-gray-300' : 'text-gray-600'
-                }`}>
+                <div className={`text-sm font-medium ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
                   {stat.label}
                 </div>
               </motion.div>
