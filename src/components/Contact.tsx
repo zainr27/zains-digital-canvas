@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
@@ -14,6 +15,7 @@ const Contact = () => {
 
   const [formData, setFormData] = useState({
     name: '',
+    company: '',
     email: '',
     message: ''
   });
@@ -69,7 +71,8 @@ const Contact = () => {
         .insert([{
           name: formData.name.trim(),
           email: formData.email.trim(),
-          message: formData.message.trim()
+          message: formData.message.trim(),
+          company: formData.company.trim() || null
         }]);
 
       if (error) {
@@ -78,7 +81,7 @@ const Contact = () => {
       }
 
       // Success - Reset form
-      setFormData({ name: '', email: '', message: '' });
+      setFormData({ name: '', company: '', email: '', message: '' });
       setErrors({});
       
       toast({
@@ -149,7 +152,7 @@ const Contact = () => {
 
             <form onSubmit={handleSubmit} className="space-y-6" noValidate aria-describedby="form-description">
               <p id="form-description" className="sr-only">
-                Fill out this form to send me a message. All fields are required.
+                Fill out this form to send me a message. Name, email, and message are required fields.
               </p>
 
               <div>
@@ -183,6 +186,29 @@ const Contact = () => {
                     {errors.name}
                   </p>
                 )}
+              </div>
+
+              <div>
+                <label 
+                  htmlFor="company" 
+                  className={`block text-sm font-medium mb-2 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}
+                >
+                  Company
+                </label>
+                <input 
+                  type="text" 
+                  id="company" 
+                  name="company" 
+                  value={formData.company} 
+                  onChange={handleChange} 
+                  disabled={isSubmitting}
+                  className={`w-full px-4 py-3 rounded-lg border transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed ${
+                    isDark 
+                      ? 'bg-gray-800 border-gray-700 text-white' 
+                      : 'bg-white border-gray-300 text-gray-900'
+                  }`}
+                  placeholder="Your company (optional)" 
+                />
               </div>
               
               <div>
