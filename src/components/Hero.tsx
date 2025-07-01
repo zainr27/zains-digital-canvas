@@ -23,6 +23,13 @@ const Hero = () => {
     }
   };
 
+  const handleOpenToWork = () => {
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section className="relative h-[85vh] flex items-center justify-center overflow-hidden pt-16">
       {/* Rice University background image */}
@@ -130,13 +137,14 @@ const Hero = () => {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+                onClick={handleOpenToWork}
                 className="bg-gradient-to-r from-green-500 to-emerald-600 text-white px-6 py-2 rounded-full font-medium flex items-center justify-center gap-2 hover:from-green-600 hover:to-emerald-700 transition-all duration-300 shadow-lg hover:shadow-xl text-sm"
               >
                 <Calendar size={16} />
                 OPEN to Work - Summer 2026
               </motion.button>
             </motion.div>
-          </motion.div>
+          </div>
         </motion.div>
       </div>
     </section>
