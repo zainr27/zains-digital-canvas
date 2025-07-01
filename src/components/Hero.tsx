@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Download, Calendar } from 'lucide-react';
+import { ArrowRight, Download, Calendar, Sparkles } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 
 const Hero = () => {
@@ -84,11 +84,57 @@ const Hero = () => {
         >
           Rising Junior at Rice University majoring in Computer Science 
         </motion.p>
+
+        {/* Open to Work - More Prominent */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          className="mb-8"
+        >
+          <motion.div
+            animate={{
+              boxShadow: [
+                '0 0 0 0 rgba(34, 197, 94, 0.6)',
+                '0 0 0 20px rgba(34, 197, 94, 0)',
+                '0 0 0 0 rgba(34, 197, 94, 0)'
+              ]
+            }}
+            transition={{
+              duration: 2.5,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+            className="inline-block rounded-2xl"
+          >
+            <motion.button
+              whileHover={{ 
+                scale: 1.08,
+                boxShadow: '0 20px 40px rgba(34, 197, 94, 0.3)'
+              }}
+              whileTap={{ scale: 0.95 }}
+              onClick={handleOpenToWork}
+              className="relative bg-gradient-to-r from-green-400 via-emerald-500 to-green-600 text-white px-10 py-4 rounded-2xl font-bold flex items-center justify-center gap-3 transition-all duration-300 shadow-2xl hover:shadow-green-500/25 text-lg border border-green-300/20"
+            >
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+              >
+                <Sparkles size={24} />
+              </motion.div>
+              OPEN to Work - Summer 2026
+              <Calendar size={20} />
+              
+              {/* Subtle inner glow */}
+              <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent rounded-2xl opacity-50" />
+            </motion.button>
+          </motion.div>
+        </motion.div>
         
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
+          transition={{ duration: 0.8, delay: 0.5 }}
           className="flex flex-col items-center gap-4"
         >
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -112,39 +158,6 @@ const Hero = () => {
               <ArrowRight size={20} />
             </motion.button>
           </div>
-          
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            className="mt-2"
-          >
-            <motion.div
-              animate={{
-                boxShadow: [
-                  '0 0 0 0 rgba(34, 197, 94, 0.4)',
-                  '0 0 0 10px rgba(34, 197, 94, 0)',
-                  '0 0 0 0 rgba(34, 197, 94, 0)'
-                ]
-              }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-              className="inline-block rounded-full"
-            >
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={handleOpenToWork}
-                className="bg-gradient-to-r from-green-500 to-emerald-600 text-white px-6 py-2 rounded-full font-medium flex items-center justify-center gap-2 hover:from-green-600 hover:to-emerald-700 transition-all duration-300 shadow-lg hover:shadow-xl text-sm"
-              >
-                <Calendar size={16} />
-                OPEN to Work - Summer 2026
-              </motion.button>
-            </motion.div>
-          </motion.div>
         </motion.div>
       </div>
     </section>
