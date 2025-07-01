@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Send, Loader, Mail } from 'lucide-react';
@@ -43,7 +42,7 @@ const ContactForm = () => {
       console.log('Generating mailto URL with form data:', formData);
       
       // Replace with your actual email address
-      const mailtoUrl = generateMailtoUrl(formData, 'zain@example.com');
+      const mailtoUrl = generateMailtoUrl(formData, 'zur1@rice.edu');
       
       const success = openMailtoLink(mailtoUrl);
       
@@ -65,7 +64,7 @@ const ContactForm = () => {
       
       toast({
         title: "Unable to Open Email Client",
-        description: "Please email me directly at zain@example.com or try again.",
+        description: "Please email me directly at zur1@rice.edu or try again.",
         variant: "destructive"
       });
     } finally {
