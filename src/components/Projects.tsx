@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { useRef } from 'react';
@@ -7,33 +8,33 @@ import { useTheme } from '../contexts/ThemeContext';
 const projects = [
   {
     title: 'dGEVNet',
-    description: 'Deep learning network for extreme weather prediction using generalized extreme value distributions.',
+    description: 'Advanced deep learning architecture combining statistical modeling with neural networks for extreme weather prediction using generalized extreme value distributions.',
     image: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&h=600&fit=crop',
-    tech: ['PyTorch', 'Python', 'MATLAB', 'Docker'],
+    tech: ['PyTorch', 'Python', 'MATLAB', 'Docker', 'Statistical Modeling'],
     github: 'https://github.com/zainr27/dGEVNet',
     demo: 'https://dossgollin-lab.github.io/',
-    details: 'Advanced neural network architecture that combines statistical modeling with deep learning for improved extreme weather event prediction. Achieved 15% improvement in accuracy over existing methods.',
-    impact: '15% accuracy improvement, 3 research publications'
+    details: 'Developed an innovative neural network architecture that integrates Generalized Extreme Value (GEV) statistics with deep learning for improved extreme weather event prediction. The model achieves superior performance in predicting rare climate events by leveraging both the representational power of neural networks and the theoretical foundations of extreme value theory.',
+    impact: '15% accuracy improvement over existing methods, published research findings'
   },
   {
     title: 'Booie',
-    description: 'AI-powered social media content optimizer for maximum engagement.',
+    description: 'AI-powered social media content optimization platform that analyzes trends and maximizes engagement through intelligent content suggestions.',
     image: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=800&h=600&fit=crop',
-    tech: ['React', 'Node.js', 'OpenAI API', 'MongoDB'],
+    tech: ['React', 'Node.js', 'OpenAI API', 'MongoDB', 'Machine Learning'],
     github: 'https://github.com/zainr27/Booie-',
     demo: 'https://github.com/zainr27/Booie-',
-    details: 'Full-stack application that analyzes social media trends and optimizes content for maximum engagement using machine learning algorithms.',
-    impact: '40% increase in user engagement, 1000+ active users'
+    details: 'Full-stack social media optimization platform that leverages machine learning algorithms to analyze social media trends, optimize posting schedules, and generate content suggestions. Features real-time analytics, automated content scoring, and personalized recommendations to maximize user engagement across multiple social platforms.',
+    impact: 'Increased user engagement by 40%, attracted 1000+ active users'
   },
   {
     title: 'QuikFlip Platform',
-    description: 'Real estate investment analysis platform with AI-driven market predictions.',
+    description: 'Comprehensive real estate investment analysis platform featuring AI-driven market predictions, property valuation, and investment opportunity identification.',
     image: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=800&h=600&fit=crop',
-    tech: ['React', 'TypeScript', 'PostgreSQL', 'GCP', 'TensorFlow'],
+    tech: ['React', 'TypeScript', 'PostgreSQL', 'Google Cloud Platform', 'TensorFlow', 'Financial Modeling'],
     github: 'https://github.com/zainr27/myquikflip',
     demo: 'https://www.myquikflip.com/',
-    details: 'Comprehensive platform for real estate investors featuring market analysis, property valuation, and investment opportunity identification using machine learning.',
-    impact: '$30K funding raised, 500+ professionals onboarded'
+    details: 'Co-founded and architected a comprehensive real estate investment platform that combines market data analysis, predictive modeling, and financial calculations. The platform provides investors with detailed property valuations, market trend analysis, ROI calculations, and automated deal sourcing. Features include advanced filtering, comparative market analysis, and investment portfolio tracking.',
+    impact: 'Secured $30K in funding, onboarded 500+ real estate professionals'
   }
 ];
 

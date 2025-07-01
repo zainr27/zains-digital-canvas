@@ -61,6 +61,22 @@ const About = () => {
             About Me
           </h2>
           
+          {/* Professional Headshot */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={isInView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="mb-8"
+          >
+            <div className="w-48 h-48 mx-auto rounded-full overflow-hidden border-4 border-indigo-600 shadow-xl">
+              <img
+                src="/lovable-uploads/1e158626-7ba5-4d11-8ce7-e647c3c6c77e.png"
+                alt="Zain Rahman - Professional Headshot"
+                className="w-full h-full object-cover"
+              />
+            </div>
+          </motion.div>
+          
           <p className={`text-lg md:text-xl mb-12 leading-relaxed ${
             isDark ? 'text-gray-300' : 'text-gray-600'
           }`}>
