@@ -69,7 +69,7 @@ const Header = () => {
               </motion.a>
               <motion.a
                 whileHover={{ scale: 1.1 }}
-                href="https://linkedin.com/in/zainrahman27"
+                href="https://www.linkedin.com/feed/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`p-2 rounded-full transition-colors ${
@@ -160,7 +160,7 @@ const Header = () => {
                   </motion.a>
                   <motion.a
                     whileHover={{ scale: 1.1 }}
-                    href="https://linkedin.com/in/zainrahman27"
+                    href="https://www.linkedin.com/feed/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className={`p-2 rounded-full transition-colors ${
