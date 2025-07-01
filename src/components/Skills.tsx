@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
@@ -22,7 +23,8 @@ const skillCategories = [
       { name: 'TensorFlow/PyTorch', level: 85 },
       { name: 'Node.js', level: 85 },
       { name: 'Django/Flask', level: 80 },
-      { name: 'Spring Boot', level: 75 }
+      { name: 'Spring Boot', level: 75 },
+      { name: 'Express.js', level: 80 }
     ]
   },
   {
@@ -43,7 +45,8 @@ const skillCategories = [
       { name: 'Problem Solving', level: 95 },
       { name: 'Communication', level: 85 },
       { name: 'Team Collaboration', level: 90 },
-      { name: 'Project Management', level: 80 }
+      { name: 'Project Management', level: 80 },
+      { name: 'Critical Thinking', level: 85 }
     ]
   }
 ];
