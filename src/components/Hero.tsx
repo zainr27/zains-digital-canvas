@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Download } from 'lucide-react';
+import { ArrowRight, Download, Calendar } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 
 const Hero = () => {
@@ -82,27 +82,61 @@ const Hero = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="flex flex-col sm:flex-row gap-4 justify-center"
+          className="flex flex-col items-center gap-4"
         >
-          <motion.button
-            whileHover={{ scale: 1.05, x: 4 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={handleResumeDownload}
-            className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-8 py-3 rounded-full font-semibold flex items-center justify-center gap-2 hover:from-blue-600 hover:to-indigo-700 transition-all duration-300 shadow-lg hover:shadow-xl"
-          >
-            <Download size={20} />
-            Download Resume
-          </motion.button>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <motion.button
+              whileHover={{ scale: 1.05, x: 4 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={handleResumeDownload}
+              className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-8 py-3 rounded-full font-semibold flex items-center justify-center gap-2 hover:from-blue-600 hover:to-indigo-700 transition-all duration-300 shadow-lg hover:shadow-xl"
+            >
+              <Download size={20} />
+              Download Resume
+            </motion.button>
+            
+            <motion.button
+              whileHover={{ scale: 1.05, x: 4 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={handleLetsTalk}
+              className="border-2 border-white text-white px-8 py-3 rounded-full font-semibold flex items-center justify-center gap-2 hover:bg-white hover:text-gray-900 transition-colors"
+            >
+              Let's Talk
+              <ArrowRight size={20} />
+            </motion.button>
+          </div>
           
-          <motion.button
-            whileHover={{ scale: 1.05, x: 4 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={handleLetsTalk}
-            className="border-2 border-white text-white px-8 py-3 rounded-full font-semibold flex items-center justify-center gap-2 hover:bg-white hover:text-gray-900 transition-colors"
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="mt-2"
           >
-            Let's Talk
-            <ArrowRight size={20} />
-          </motion.button>
+            <motion.div
+              animate={{
+                boxShadow: [
+                  '0 0 0 0 rgba(34, 197, 94, 0.4)',
+                  '0 0 0 10px rgba(34, 197, 94, 0)',
+                  '0 0 0 0 rgba(34, 197, 94, 0)'
+                ]
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+              className="inline-block rounded-full"
+            >
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-gradient-to-r from-green-500 to-emerald-600 text-white px-6 py-2 rounded-full font-medium flex items-center justify-center gap-2 hover:from-green-600 hover:to-emerald-700 transition-all duration-300 shadow-lg hover:shadow-xl text-sm"
+              >
+                <Calendar size={16} />
+                OPEN to Work - Summer 2026
+              </motion.button>
+            </motion.div>
+          </motion.div>
         </motion.div>
       </div>
     </section>
