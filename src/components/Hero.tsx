@@ -24,7 +24,7 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+    <section className="relative h-[85vh] flex items-center justify-center overflow-hidden pt-16">
       {/* Rice University background image */}
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
@@ -38,7 +38,7 @@ const Hero = () => {
       
       {/* Animated particles */}
       <div className="absolute inset-0">
-        {[...Array(50)].map((_, i) => (
+        {[...Array(40)].map((_, i) => (
           <motion.div
             key={i}
             className="absolute w-2 h-2 bg-white/20 rounded-full"
@@ -64,7 +64,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-5xl md:text-7xl font-bold mb-6 leading-tight"
+          className="text-4xl md:text-6xl font-bold mb-5 leading-tight"
         >
           Zain Rahman
         </motion.h1>
@@ -73,7 +73,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-xl md:text-2xl mb-8 text-gray-100"
+          className="text-lg md:text-xl mb-7 text-gray-100"
         >
           Engineering AI-first solutions for real-world impact
         </motion.p>
