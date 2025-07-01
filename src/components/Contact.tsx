@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { Mail, Phone, Send, CheckCircle, AlertCircle } from 'lucide-react';
+import { Phone, Send, CheckCircle, AlertCircle, Twitter } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 
 const Contact = () => {
@@ -119,12 +119,14 @@ const Contact = () => {
               
               <div className="space-y-4">
                 <motion.a
-                  href="mailto:zur1@rice.edu"
+                  href="https://x.com/bitacolyte"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   whileHover={{ x: 8 }}
                   className={`flex items-center space-x-4 p-4 rounded-lg transition-colors ${isDark ? 'text-gray-300 hover:bg-gray-800' : 'text-gray-600 hover:bg-gray-100'}`}
                 >
-                  <Mail className="text-indigo-600" size={24} />
-                  <span>zur1@rice.edu</span>
+                  <Twitter className="text-indigo-600" size={24} />
+                  <span>@bitacolyte</span>
                 </motion.a>
                 
                 <motion.a
@@ -164,7 +166,7 @@ const Contact = () => {
                   className="mb-6 p-4 bg-red-100 border border-red-300 rounded-lg flex items-center space-x-2 text-red-800"
                 >
                   <AlertCircle size={20} />
-                  <span>Sorry, there was an error sending your message. Please try again or email me directly.</span>
+                  <span>Sorry, there was an error sending your message. Please try again or contact me directly.</span>
                 </motion.div>
               )}
 

@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Moon, Sun, Menu, X, Github, Linkedin, Mail } from 'lucide-react';
+import { Moon, Sun, Menu, X, Github, Linkedin, Twitter } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '../contexts/ThemeContext';
 
@@ -80,12 +80,14 @@ const Header = () => {
               </motion.a>
               <motion.a
                 whileHover={{ scale: 1.1 }}
-                href="mailto:zur1@rice.edu"
+                href="https://x.com/bitacolyte"
+                target="_blank"
+                rel="noopener noreferrer"
                 className={`p-2 rounded-full transition-colors ${
                   isDark ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'
                 }`}
               >
-                <Mail size={16} />
+                <Twitter size={16} />
               </motion.a>
             </div>
             
@@ -169,12 +171,14 @@ const Header = () => {
                   </motion.a>
                   <motion.a
                     whileHover={{ scale: 1.1 }}
-                    href="mailto:zur1@rice.edu"
+                    href="https://x.com/bitacolyte"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className={`p-2 rounded-full transition-colors ${
                       isDark ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'
                     }`}
                   >
-                    <Mail size={20} />
+                    <Twitter size={20} />
                   </motion.a>
                 </div>
               </nav>
