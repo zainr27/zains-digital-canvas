@@ -9,33 +9,33 @@ import LazyImage from './ui/LazyImage';
 const projects = [
   {
     title: 'dGEVNet',
-    description: 'Advanced deep learning architecture combining statistical modeling with neural networks for extreme weather prediction using generalized extreme value distributions.',
+    description: 'Advanced deep learning architecture for spatiotemporal rainfall forecasting using Generalized Extreme Value distributions to predict nonstationary weather patterns.',
     image: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&h=600&fit=crop',
-    tech: ['PyTorch', 'Python', 'MATLAB', 'Docker', 'Statistical Modeling'],
+    tech: ['PyTorch', 'NumPy', 'GIS', 'Matplotlib', 'Statistical Modeling'],
     github: 'https://github.com/zainr27/dGEVNet',
     demo: 'https://dossgollin-lab.github.io/',
-    details: 'Developed an innovative neural network architecture that integrates Generalized Extreme Value (GEV) statistics with deep learning for improved extreme weather event prediction. The model achieves superior performance in predicting rare climate events by leveraging both the representational power of neural networks and the theoretical foundations of extreme value theory.',
-    impact: '15% accuracy improvement over existing methods, published research findings'
+    details: 'Developed a cutting-edge deep learning architecture that predicts nonstationary rainfall patterns using GEV distributions. The model incorporates spatial Laplacian smoothness regularization to enforce geographic continuity in predictions. Successfully integrated geospatial datasets with automated preprocessing pipelines, achieving a 30% reduction in runtime while maintaining high prediction accuracy for extreme weather events.',
+    impact: '30% runtime reduction, enhanced extreme weather prediction accuracy'
   },
   {
     title: 'Booie',
-    description: 'AI-powered social media content optimization platform that analyzes trends and maximizes engagement through intelligent content suggestions.',
+    description: 'Full-stack Income Share Agreement (ISA) financing platform providing personalized education financing with comprehensive student onboarding and repayment modeling.',
     image: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=800&h=600&fit=crop',
-    tech: ['React', 'Node.js', 'OpenAI API', 'MongoDB', 'Machine Learning'],
+    tech: ['React', 'TypeScript', 'Supabase', 'PostgreSQL', 'Framer Motion', 'TanStack Query'],
     github: 'https://github.com/zainr27/Booie-',
     demo: 'https://github.com/zainr27/Booie-',
-    details: 'Full-stack social media optimization platform that leverages machine learning algorithms to analyze social media trends, optimize posting schedules, and generate content suggestions. Features real-time analytics, automated content scoring, and personalized recommendations to maximize user engagement across multiple social platforms.',
-    impact: 'Increased user engagement by 40%, attracted 1000+ active users'
+    details: 'Built a comprehensive ISA financing platform featuring personalized repayment modeling and streamlined student onboarding. Implemented secure authentication, multi-step onboarding workflows, and financial data intake systems using Supabase. Designed and deployed a robust 12-table PostgreSQL schema handling user profiles, applications, and document workflows. Enhanced security with edge functions, Row-Level Security (RLS), and comprehensive audit logging for session management and data compliance.',
+    impact: 'Streamlined education financing, secure multi-step onboarding system'
   },
   {
     title: 'QuikFlip Platform',
-    description: 'Comprehensive real estate investment analysis platform featuring AI-driven market predictions, property valuation, and investment opportunity identification.',
+    description: 'Full-stack crypto payments application for real estate transactions, featuring automated conversion logic and enterprise-grade deployment infrastructure.',
     image: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=800&h=600&fit=crop',
-    tech: ['React', 'TypeScript', 'PostgreSQL', 'Google Cloud Platform', 'TensorFlow', 'Financial Modeling'],
+    tech: ['React', 'AWS Lambda', 'AWS S3', 'AWS CodePipeline', 'CloudWatch', 'Postman'],
     github: 'https://github.com/zainr27/myquikflip',
     demo: 'https://www.myquikflip.com/',
-    details: 'Co-founded and architected a comprehensive real estate investment platform that combines market data analysis, predictive modeling, and financial calculations. The platform provides investors with detailed property valuations, market trend analysis, ROI calculations, and automated deal sourcing. Features include advanced filtering, comparative market analysis, and investment portfolio tracking.',
-    impact: 'Secured $30K in funding, onboarded 500+ real estate professionals'
+    details: 'Co-founded and architected a full-stack crypto payments application for real estate transactions using React frontend with AWS Lambda and S3 backend infrastructure. Developed sophisticated backend conversion logic and established comprehensive CI/CD deployment pipeline via AWS CodePipeline with CloudWatch monitoring. Created extensive Postman test suites for all API endpoints, maintaining sub-200ms response latency. Successfully raised $30,000 pre-seed funding from Jefferson Foundation and achieved YC Top 10% recognition.',
+    impact: 'Raised $30K pre-seed funding, YC Top 10%, sub-200ms API response times'
   }
 ];
 
