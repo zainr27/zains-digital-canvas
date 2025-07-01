@@ -92,10 +92,20 @@ const Projects = () => {
                 transition={{ duration: 0.8, delay: index * 0.1 }}
                 className={`group cursor-pointer rounded-lg overflow-hidden transition-all duration-300 backdrop-blur-md border ${
                   isDark 
-                    ? 'bg-gray-800/40 border-gray-700/50 hover:bg-gray-700/50' 
-                    : 'bg-white/40 border-gray-200/50 hover:bg-white/60'
-                } shadow-lg hover:shadow-xl focus-within:ring-2 focus-within:ring-indigo-500`}
-                whileHover={{ y: -8 }}
+                    ? 'bg-gray-800/40 border-gray-700/50 hover:bg-gray-700/50 shadow-lg hover:shadow-indigo-500/25 hover:shadow-2xl' 
+                    : 'bg-white/40 border-gray-200/50 hover:bg-white/60 shadow-lg hover:shadow-indigo-400/30 hover:shadow-2xl'
+                } shadow-lg focus-within:ring-2 focus-within:ring-indigo-500`}
+                style={{
+                  boxShadow: isDark 
+                    ? '0 10px 25px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(99, 102, 241, 0.1)'
+                    : '0 10px 25px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(99, 102, 241, 0.1)'
+                }}
+                whileHover={{ 
+                  y: -8,
+                  boxShadow: isDark 
+                    ? '0 25px 50px -12px rgba(99, 102, 241, 0.25), 0 0 0 1px rgba(99, 102, 241, 0.2)'
+                    : '0 25px 50px -12px rgba(99, 102, 241, 0.25), 0 0 0 1px rgba(99, 102, 241, 0.2)'
+                }}
                 onClick={() => setSelectedProject(project)}
                 onKeyDown={(e) => handleKeyDown(e, project)}
                 tabIndex={0}
@@ -109,6 +119,9 @@ const Projects = () => {
                     className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className={`absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-300 ${
+                    isDark ? 'bg-indigo-400/10' : 'bg-indigo-500/10'
+                  }`} />
                 </div>
                 
                 <div className="p-6">
@@ -166,6 +179,11 @@ const Projects = () => {
                   ? 'bg-gray-800/90 border-gray-700/50' 
                   : 'bg-white/90 border-gray-200/50'
               }`}
+              style={{
+                boxShadow: isDark
+                  ? '0 25px 50px -12px rgba(99, 102, 241, 0.4), 0 0 0 1px rgba(99, 102, 241, 0.3)'
+                  : '0 25px 50px -12px rgba(99, 102, 241, 0.4), 0 0 0 1px rgba(99, 102, 241, 0.3)'
+              }}
               onClick={(e) => e.stopPropagation()}
             >
               <div className="relative">
