@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Moon, Sun, Menu, X, Github, Linkedin, Twitter } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -27,34 +28,38 @@ const Header = () => {
           : 'bg-white/60 border-gray-200/50'
       }`}
     >
-      <div className="container mx-auto px-4 py-4">
+      <div className="container mx-auto px-6 py-4">
         <div className="flex justify-between items-center">
+          {/* Logo */}
           <motion.div 
             whileHover={{ scale: 1.05 }}
-            className="text-xl font-bold bg-gradient-to-r from-teal-400 to-indigo-600 bg-clip-text text-transparent"
+            className="text-xl font-bold bg-gradient-to-r from-teal-400 to-indigo-600 bg-clip-text text-transparent flex-shrink-0"
           >
             ZR
           </motion.div>
           
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex space-x-8">
-            {navigationItems.map((item) => (
-              <motion.button
-                key={item}
-                whileHover={{ y: -2 }}
-                onClick={() => scrollToSection(item.toLowerCase())}
-                className={`text-sm font-medium transition-colors ${
-                  isDark ? 'text-gray-300 hover:text-white' : 'text-gray-600 hover:text-gray-900'
-                }`}
-              >
-                {item}
-              </motion.button>
-            ))}
+          {/* Desktop Navigation - Centered */}
+          <nav className="hidden md:flex flex-1 justify-center">
+            <div className="flex space-x-8">
+              {navigationItems.map((item) => (
+                <motion.button
+                  key={item}
+                  whileHover={{ y: -2 }}
+                  onClick={() => scrollToSection(item.toLowerCase())}
+                  className={`text-sm font-medium transition-colors px-2 py-1 ${
+                    isDark ? 'text-gray-300 hover:text-white' : 'text-gray-600 hover:text-gray-900'
+                  }`}
+                >
+                  {item}
+                </motion.button>
+              ))}
+            </div>
           </nav>
 
-          {/* Social Links & Theme Toggle */}
-          <div className="flex items-center space-x-4">
-            <div className="hidden md:flex items-center space-x-2">
+          {/* Right side controls */}
+          <div className="flex items-center space-x-3">
+            {/* Desktop Social Links */}
+            <div className="hidden md:flex items-center space-x-1">
               <motion.a
                 whileHover={{ scale: 1.1 }}
                 href="https://github.com/zainr27"
@@ -90,6 +95,7 @@ const Header = () => {
               </motion.a>
             </div>
             
+            {/* Theme Toggle */}
             <motion.button
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
