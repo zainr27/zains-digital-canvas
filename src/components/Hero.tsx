@@ -16,6 +16,13 @@ const Hero = () => {
     document.body.removeChild(link);
   };
 
+  const handleLetsTalk = () => {
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
       {/* Rice University background image */}
@@ -90,6 +97,7 @@ const Hero = () => {
           <motion.button
             whileHover={{ scale: 1.05, x: 4 }}
             whileTap={{ scale: 0.95 }}
+            onClick={handleLetsTalk}
             className="border-2 border-white text-white px-8 py-3 rounded-full font-semibold flex items-center justify-center gap-2 hover:bg-white hover:text-gray-900 transition-colors"
           >
             Let's Talk

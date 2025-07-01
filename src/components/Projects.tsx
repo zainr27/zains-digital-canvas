@@ -1,7 +1,8 @@
+
 import React, { useState } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { useRef } from 'react';
-import { ExternalLink, X } from 'lucide-react';
+import { ExternalLink, X, Github } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 
 const projects = [
@@ -10,8 +11,8 @@ const projects = [
     description: 'Deep learning network for extreme weather prediction using generalized extreme value distributions.',
     image: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&h=600&fit=crop',
     tech: ['PyTorch', 'Python', 'MATLAB', 'Docker'],
-    github: 'https://github.com/zainr27',
-    demo: 'https://github.com/zainr27',
+    github: 'https://github.com/zainr27/dGEVNet', 
+    demo: 'https://github.com/zainr27/dGEVNet',
     details: 'Advanced neural network architecture that combines statistical modeling with deep learning for improved extreme weather event prediction. Achieved 15% improvement in accuracy over existing methods.',
     impact: '15% accuracy improvement, 3 research publications'
   },
@@ -20,8 +21,8 @@ const projects = [
     description: 'AI-powered social media content optimizer for maximum engagement.',
     image: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=800&h=600&fit=crop',
     tech: ['React', 'Node.js', 'OpenAI API', 'MongoDB'],
-    github: 'https://github.com/zainr27',
-    demo: 'https://github.com/zainr27',
+    github: 'https://github.com/zainr27/booie',
+    demo: 'https://booie.app',
     details: 'Full-stack application that analyzes social media trends and optimizes content for maximum engagement using machine learning algorithms.',
     impact: '40% increase in user engagement, 1000+ active users'
   },
@@ -30,8 +31,8 @@ const projects = [
     description: 'Real estate investment analysis platform with AI-driven market predictions.',
     image: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=800&h=600&fit=crop',
     tech: ['React', 'TypeScript', 'PostgreSQL', 'GCP', 'TensorFlow'],
-    github: 'https://github.com/zainr27',
-    demo: 'https://github.com/zainr27',
+    github: 'https://github.com/zainr27/quikflip',
+    demo: 'https://quikflip.com',
     details: 'Comprehensive platform for real estate investors featuring market analysis, property valuation, and investment opportunity identification using machine learning.',
     impact: '$30K funding raised, 500+ professionals onboarded'
   }
@@ -194,7 +195,7 @@ const Projects = () => {
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 px-4 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-600 transition-colors"
                   >
-                    <ExternalLink size={16} />
+                    <Github size={16} />
                     GitHub
                   </motion.a>
                   <motion.a

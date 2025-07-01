@@ -1,18 +1,22 @@
 
-import React from 'react';
-import { Moon, Sun } from 'lucide-react';
-import { motion } from 'framer-motion';
+import React, { useState } from 'react';
+import { Moon, Sun, Menu, X, Github, Linkedin, Mail } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '../contexts/ThemeContext';
 
 const Header = () => {
   const { isDark, toggleTheme } = useTheme();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
+    setIsMobileMenuOpen(false);
   };
+
+  const navigationItems = ['About', 'Experience', 'Projects', 'Skills', 'Contact'];
 
   return (
     <motion.header 
@@ -33,8 +37,9 @@ const Header = () => {
             ZR
           </motion.div>
           
+          {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-8">
-            {['About', 'Experience', 'Projects', 'Skills', 'Contact'].map((item) => (
+            {navigationItems.map((item) => (
               <motion.button
                 key={item}
                 whileHover={{ y: -2 }}
@@ -47,20 +52,135 @@ const Header = () => {
               </motion.button>
             ))}
           </nav>
-          
-          <motion.button
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={toggleTheme}
-            className={`p-2 rounded-full backdrop-blur-md border transition-colors ${
-              isDark 
-                ? 'bg-gray-800/60 border-gray-700/50 text-yellow-400' 
-                : 'bg-gray-100/60 border-gray-200/50 text-gray-600'
-            }`}
-          >
-            {isDark ? <Sun size={20} /> : <Moon size={20} />}
-          </motion.button>
+
+          {/* Social Links & Theme Toggle */}
+          <div className="flex items-center space-x-4">
+            <div className="hidden md:flex items-center space-x-2">
+              <motion.a
+                whileHover={{ scale: 1.1 }}
+                href="https://github.com/zainr27"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`p-2 rounded-full transition-colors ${
+                  isDark ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'
+                }`}
+              >
+                <Github size={16} />
+              </motion.a>
+              <motion.a
+                whileHover={{ scale: 1.1 }}
+                href="https://linkedin.com/in/zainrahman27"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`p-2 rounded-full transition-colors ${
+                  isDark ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'
+                }`}
+              >
+                <Linkedin size={16} />
+              </motion.a>
+              <motion.a
+                whileHover={{ scale: 1.1 }}
+                href="mailto:zur1@rice.edu"
+                className={`p-2 rounded-full transition-colors ${
+                  isDark ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'
+                }`}
+              >
+                <Mail size={16} />
+              </motion.a>
+            </div>
+            
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={toggleTheme}
+              className={`p-2 rounded-full backdrop-blur-md border transition-colors ${
+                isDark 
+                  ? 'bg-gray-800/60 border-gray-700/50 text-yellow-400' 
+                  : 'bg-gray-100/60 border-gray-200/50 text-gray-600'
+              }`}
+            >
+              {isDark ? <Sun size={20} /> : <Moon size={20} />}
+            </motion.button>
+
+            {/* Mobile Menu Button */}
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className={`md:hidden p-2 rounded-full backdrop-blur-md border transition-colors ${
+                isDark 
+                  ? 'bg-gray-800/60 border-gray-700/50 text-white' 
+                  : 'bg-gray-100/60 border-gray-200/50 text-gray-600'
+              }`}
+            >
+              {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+            </motion.button>
+          </div>
         </div>
+
+        {/* Mobile Navigation Menu */}
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              className={`md:hidden mt-4 pt-4 border-t ${
+                isDark ? 'border-gray-700/50' : 'border-gray-200/50'
+              }`}
+            >
+              <nav className="flex flex-col space-y-4">
+                {navigationItems.map((item) => (
+                  <motion.button
+                    key={item}
+                    whileHover={{ x: 4 }}
+                    onClick={() => scrollToSection(item.toLowerCase())}
+                    className={`text-left text-sm font-medium transition-colors ${
+                      isDark ? 'text-gray-300 hover:text-white' : 'text-gray-600 hover:text-gray-900'
+                    }`}
+                  >
+                    {item}
+                  </motion.button>
+                ))}
+                
+                {/* Mobile Social Links */}
+                <div className="flex items-center space-x-4 pt-4">
+                  <motion.a
+                    whileHover={{ scale: 1.1 }}
+                    href="https://github.com/zainr27"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`p-2 rounded-full transition-colors ${
+                      isDark ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'
+                    }`}
+                  >
+                    <Github size={20} />
+                  </motion.a>
+                  <motion.a
+                    whileHover={{ scale: 1.1 }}
+                    href="https://linkedin.com/in/zainrahman27"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`p-2 rounded-full transition-colors ${
+                      isDark ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'
+                    }`}
+                  >
+                    <Linkedin size={20} />
+                  </motion.a>
+                  <motion.a
+                    whileHover={{ scale: 1.1 }}
+                    href="mailto:zur1@rice.edu"
+                    className={`p-2 rounded-full transition-colors ${
+                      isDark ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'
+                    }`}
+                  >
+                    <Mail size={20} />
+                  </motion.a>
+                </div>
+              </nav>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </motion.header>
   );
