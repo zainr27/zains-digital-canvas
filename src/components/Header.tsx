@@ -102,7 +102,7 @@ const Header = () => {
               onClick={toggleTheme}
               className={`p-2.5 rounded-full backdrop-blur-md border transition-colors ${
                 isDark 
-                  ? 'bg-gray-800/60 border-gray-700/50 text-yellow-400' 
+                  ? 'bg-gray-800/60 border-gray-700/50 text-white' 
                   : 'bg-gray-100/60 border-gray-200/50 text-gray-600'
               }`}
             >
