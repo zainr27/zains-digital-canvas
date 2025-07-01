@@ -1,11 +1,11 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Send, Loader } from 'lucide-react';
+import { Send, Loader, Mail } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 import { useToast } from '../hooks/use-toast';
-import { supabase } from '@/integrations/supabase/client';
 import { validateContactForm, FormData, FormErrors } from '../utils/contactFormValidation';
+import { generateMailtoUrl, openMailtoLink } from '../utils/mailtoUtils';
 import ContactFormField from './ContactFormField';
 import ContactTextareaField from './ContactTextareaField';
 
@@ -40,38 +40,32 @@ const ContactForm = () => {
     setIsSubmitting(true);
     
     try {
-      console.log('Submitting form to Supabase:', formData);
+      console.log('Generating mailto URL with form data:', formData);
       
-      const { error } = await supabase
-        .from('contact_messages')
-        .insert([{
-          name: formData.name.trim(),
-          email: formData.email.trim(),
-          message: formData.message.trim(),
-          company: formData.company.trim() || null
-        }]);
-
-      if (error) {
-        console.error('Supabase error:', error);
-        throw new Error(`Failed to save message: ${error.message}`);
+      // Replace with your actual email address
+      const mailtoUrl = generateMailtoUrl(formData, 'zain@example.com');
+      
+      const success = openMailtoLink(mailtoUrl);
+      
+      if (success) {
+        // Success - Reset form
+        setFormData({ name: '', company: '', email: '', message: '' });
+        setErrors({});
+        
+        toast({
+          title: "Email Client Opened!",
+          description: "Your email client should open with the message pre-filled. Please send the email to complete your message."
+        });
+      } else {
+        throw new Error('Failed to open email client');
       }
-
-      // Success - Reset form
-      setFormData({ name: '', company: '', email: '', message: '' });
-      setErrors({});
-      
-      toast({
-        title: "Message Sent Successfully!",
-        description: "Thank you for your message. I'll get back to you within 24 hours."
-      });
       
     } catch (error) {
       console.error('Form submission error:', error);
-      const errorMessage = error instanceof Error ? error.message : 'An unexpected error occurred';
       
       toast({
-        title: "Failed to Send Message",
-        description: `${errorMessage}. Please try again or contact me directly.`,
+        title: "Unable to Open Email Client",
+        description: "Please email me directly at zain@example.com or try again.",
         variant: "destructive"
       });
     } finally {
@@ -108,7 +102,7 @@ const ContactForm = () => {
 
       <form onSubmit={handleSubmit} className="space-y-6" noValidate aria-describedby="form-description">
         <p id="form-description" className="sr-only">
-          Fill out this form to send me a message. Name, email, and message are required fields.
+          Fill out this form to send me a message. Name, email, and message are required fields. This will open your email client.
         </p>
 
         <ContactFormField
@@ -159,6 +153,11 @@ const ContactForm = () => {
           rows={5}
           maxLength={1000}
         />
+
+        <div className={`text-sm ${isDark ? 'text-gray-300' : 'text-gray-600'} mb-4`}>
+          <Mail className="inline w-4 h-4 mr-2" />
+          This will open your email client with a pre-filled message
+        </div>
         
         <motion.button 
           type="submit" 
@@ -171,17 +170,17 @@ const ContactForm = () => {
           {isSubmitting ? (
             <>
               <Loader className="animate-spin" size={18} aria-hidden="true" />
-              <span>Sending...</span>
+              <span>Opening Email...</span>
             </>
           ) : (
             <>
-              <Send size={18} aria-hidden="true" />
-              <span>Send Message</span>
+              <Mail size={18} aria-hidden="true" />
+              <span>Open Email Client</span>
             </>
           )}
         </motion.button>
         <p id="submit-button-description" className="sr-only">
-          {isSubmitting ? 'Message is being sent' : 'Click to send your message'}
+          {isSubmitting ? 'Email client is opening' : 'Click to open your email client with pre-filled message'}
         </p>
       </form>
     </motion.div>
