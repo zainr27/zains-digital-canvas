@@ -33,20 +33,20 @@ const Header = () => {
           {/* Logo */}
           <motion.div 
             whileHover={{ scale: 1.05 }}
-            className="text-xl font-bold bg-gradient-to-r from-teal-400 to-indigo-600 bg-clip-text text-transparent flex-shrink-0"
+            className="text-xl font-bold bg-gradient-to-r from-teal-400 to-indigo-600 bg-clip-text text-transparent w-16 flex-shrink-0"
           >
             ZR
           </motion.div>
           
           {/* Desktop Navigation - Centered */}
-          <nav className="hidden md:flex flex-1 justify-center">
+          <nav className="hidden md:flex flex-1 justify-center max-w-2xl mx-8">
             <div className="flex space-x-8">
               {navigationItems.map((item) => (
                 <motion.button
                   key={item}
                   whileHover={{ y: -2 }}
                   onClick={() => scrollToSection(item.toLowerCase())}
-                  className={`text-sm font-medium transition-colors px-2 py-1 ${
+                  className={`text-sm font-medium transition-colors px-3 py-2 ${
                     isDark ? 'text-gray-300 hover:text-white' : 'text-gray-600 hover:text-gray-900'
                   }`}
                 >
@@ -57,7 +57,7 @@ const Header = () => {
           </nav>
 
           {/* Right side controls */}
-          <div className="flex items-center space-x-3">
+          <div className="flex items-center space-x-2 w-auto min-w-fit">
             {/* Desktop Social Links */}
             <div className="hidden md:flex items-center space-x-1">
               <motion.a
@@ -69,7 +69,7 @@ const Header = () => {
                   isDark ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'
                 }`}
               >
-                <Github size={16} />
+                <Github size={18} />
               </motion.a>
               <motion.a
                 whileHover={{ scale: 1.1 }}
@@ -80,7 +80,7 @@ const Header = () => {
                   isDark ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'
                 }`}
               >
-                <Linkedin size={16} />
+                <Linkedin size={18} />
               </motion.a>
               <motion.a
                 whileHover={{ scale: 1.1 }}
@@ -91,7 +91,7 @@ const Header = () => {
                   isDark ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'
                 }`}
               >
-                <Twitter size={16} />
+                <Twitter size={18} />
               </motion.a>
             </div>
             
@@ -100,7 +100,7 @@ const Header = () => {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
               onClick={toggleTheme}
-              className={`p-2 rounded-full backdrop-blur-md border transition-colors ${
+              className={`p-2.5 rounded-full backdrop-blur-md border transition-colors ${
                 isDark 
                   ? 'bg-gray-800/60 border-gray-700/50 text-yellow-400' 
                   : 'bg-gray-100/60 border-gray-200/50 text-gray-600'
@@ -114,7 +114,7 @@ const Header = () => {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className={`md:hidden p-2 rounded-full backdrop-blur-md border transition-colors ${
+              className={`md:hidden p-2.5 rounded-full backdrop-blur-md border transition-colors ${
                 isDark 
                   ? 'bg-gray-800/60 border-gray-700/50 text-white' 
                   : 'bg-gray-100/60 border-gray-200/50 text-gray-600'
