@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Moon, Sun, Menu, X, Github, Linkedin, Twitter } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -69,7 +68,7 @@ const Header = () => {
               </motion.a>
               <motion.a
                 whileHover={{ scale: 1.1 }}
-                href="https://www.linkedin.com/feed/"
+                href="https://www.linkedin.com/in/zrah/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`p-2 rounded-full transition-colors ${
@@ -160,7 +159,7 @@ const Header = () => {
                   </motion.a>
                   <motion.a
                     whileHover={{ scale: 1.1 }}
-                    href="https://www.linkedin.com/feed/"
+                    href="https://www.linkedin.com/in/zrah/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className={`p-2 rounded-full transition-colors ${
