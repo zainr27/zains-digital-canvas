@@ -82,9 +82,9 @@ const About = () => {
           </motion.div>
           
           <p className={`text-lg md:text-xl mb-12 leading-relaxed ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
-            Houston-based CS + Business student at Rice University, passionate about building 
-            AI-driven solutions that create measurable impact. As a co-founder and AI architect, 
-            I bridge the gap between cutting-edge technology and real-world applications, 
+            Hey! My name is Zain Rahman. I'm an ambitious and dedicated Computer Science student at Rice University. 
+            I am passionate about the intriate dynamics of Software Engineering, Quantum Computing, and Artificial Intelligence.
+            My goal is to help bridge the gap between cutting-edge technology and real-world applications, 
             turning complex problems into elegant, scalable solutions.
           </p>
           
