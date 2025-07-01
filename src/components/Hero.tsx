@@ -144,7 +144,7 @@ const Hero = () => {
                 OPEN to Work - Summer 2026
               </motion.button>
             </motion.div>
-          </div>
+          </motion.div>
         </motion.div>
       </div>
     </section>
