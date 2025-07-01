@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
@@ -69,7 +70,7 @@ const Experience = () => {
           <h2 className={`text-4xl md:text-5xl font-bold text-center mb-16 ${
             isDark ? 'text-white' : 'text-gray-900'
           }`}>
-            Experience
+            Work Experience & Research
           </h2>
           
           <div className="space-y-6">
