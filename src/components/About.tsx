@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
@@ -17,7 +18,7 @@ const About = () => {
 
   useEffect(() => {
     if (isInView) {
-      const targets = { experience: 5, projects: 15, languages: 8 };
+      const targets = { experience: 2, projects: 7, languages: 15 };
       const duration = 2000;
       const steps = 60;
       const stepTime = duration / steps;
@@ -94,7 +95,7 @@ const About = () => {
           >
             {[
               { label: 'Years Coding', value: counts.experience, suffix: '+' },
-              { label: 'Projects Shipped', value: counts.projects, suffix: '+' },
+              { label: 'MVP Shipped', value: counts.projects, suffix: '+' },
               { label: 'Technologies', value: counts.languages, suffix: '+' },
             ].map((stat, index) => (
               <motion.div
