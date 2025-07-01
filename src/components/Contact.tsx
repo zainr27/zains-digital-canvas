@@ -1,10 +1,10 @@
-
 import React, { useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { Phone, Send, CheckCircle, AlertCircle, Twitter, Loader } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 import { useToast } from '../hooks/use-toast';
+import { supabase } from '@/integrations/supabase/client';
 
 const Contact = () => {
   const { isDark } = useTheme();
@@ -62,20 +62,22 @@ const Contact = () => {
     setIsSubmitting(true);
 
     try {
-      // Simulate form submission with potential network issues
-      console.log('Submitting form:', formData);
+      console.log('Submitting form to Supabase:', formData);
       
-      // Simulate network delay and potential failure
-      await new Promise((resolve, reject) => {
-        setTimeout(() => {
-          // Simulate 10% chance of network error
-          if (Math.random() < 0.1) {
-            reject(new Error('Network error: Unable to send message'));
-          } else {
-            resolve(true);
+      const { error } = await supabase
+        .from('contact_messages')
+        .insert([
+          {
+            name: formData.name.trim(),
+            email: formData.email.trim(),
+            message: formData.message.trim()
           }
-        }, Math.random() * 2000 + 1000); // 1-3 second delay
-      });
+        ]);
+
+      if (error) {
+        console.error('Supabase error:', error);
+        throw new Error(`Failed to save message: ${error.message}`);
+      }
       
       // Success - Reset form
       setFormData({ name: '', email: '', message: '' });
