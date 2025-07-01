@@ -24,7 +24,7 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative h-[70vh] flex items-center justify-center overflow-hidden pt-16">
+    <section className="relative h-[90vh] flex items-center justify-center overflow-hidden pt-16">
       {/* Rice University background image */}
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
