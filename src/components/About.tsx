@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
@@ -47,10 +46,10 @@ const About = () => {
   return (
     <section 
       id="about" 
-      className={`py-12 sm:py-16 md:py-20 backdrop-blur-sm ${isDark ? 'bg-gray-900/30' : 'bg-white/30'}`}
+      className={`py-20 backdrop-blur-sm ${isDark ? 'bg-gray-900/30' : 'bg-white/30'}`}
       aria-labelledby="about-heading"
     >
-      <div className="container mx-auto px-4 sm:px-6">
+      <div className="container mx-auto px-4">
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 50 }}
@@ -60,7 +59,7 @@ const About = () => {
         >
           <h2 
             id="about-heading"
-            className={`text-3xl sm:text-4xl md:text-5xl font-bold mb-6 sm:mb-8 ${isDark ? 'text-white' : 'text-gray-900'}`}
+            className={`text-4xl md:text-5xl font-bold mb-8 ${isDark ? 'text-white' : 'text-gray-900'}`}
           >
             About Me
           </h2>
@@ -70,9 +69,9 @@ const About = () => {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="mb-6 sm:mb-8"
+            className="mb-8"
           >
-            <div className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 mx-auto rounded-full overflow-hidden border-4 border-indigo-600 shadow-xl">
+            <div className="w-48 h-48 mx-auto rounded-full overflow-hidden border-4 border-indigo-600 shadow-xl">
               <LazyImage
                 src="/lovable-uploads/1e158626-7ba5-4d11-8ce7-e647c3c6c77e.png"
                 alt="Zain Rahman - Professional headshot of a young computer science student at Rice University"
@@ -81,7 +80,7 @@ const About = () => {
             </div>
           </motion.div>
           
-          <p className={`text-base sm:text-lg md:text-xl mb-8 sm:mb-12 leading-relaxed px-2 sm:px-0 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+          <p className={`text-lg md:text-xl mb-12 leading-relaxed ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
             Hey! My name is Zain Rahman. I'm an ambitious and dedicated Computer Science student at Rice University. 
             I am passionate about the intriate dynamics of Software Engineering, Quantum Computing, and Artificial Intelligence.
             My goal is to help bridge the gap between cutting-edge technology and real-world applications, 
@@ -89,7 +88,7 @@ const About = () => {
           </p>
           
           <div 
-            className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 md:gap-8 mb-8 sm:mb-12"
+            className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12"
             role="list"
             aria-label="Professional statistics"
           >
@@ -103,7 +102,7 @@ const About = () => {
                 initial={{ opacity: 0, y: 30 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.8, delay: index * 0.1 }}
-                className={`p-4 sm:p-6 rounded-lg backdrop-blur-md border ${
+                className={`p-6 rounded-lg backdrop-blur-md border ${
                   isDark 
                     ? 'bg-gray-800/40 border-gray-700/50' 
                     : 'bg-white/40 border-gray-200/50'
@@ -111,12 +110,12 @@ const About = () => {
                 role="listitem"
               >
                 <div 
-                  className="text-2xl sm:text-3xl md:text-4xl font-bold text-indigo-600 mb-2"
+                  className="text-3xl md:text-4xl font-bold text-indigo-600 mb-2"
                   aria-label={`${stat.value}${stat.suffix} ${stat.label}`}
                 >
                   {stat.value}{stat.suffix}
                 </div>
-                <div className={`text-xs sm:text-sm font-medium ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+                <div className={`text-sm font-medium ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
                   {stat.label}
                 </div>
               </motion.div>
@@ -127,24 +126,24 @@ const About = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.8 }}
-            className={`p-4 sm:p-6 rounded-lg backdrop-blur-md border ${
+            className={`p-6 rounded-lg backdrop-blur-md border ${
               isDark 
                 ? 'bg-gray-800/30 border-gray-700/30' 
                 : 'bg-white/30 border-gray-200/30'
             } shadow-lg max-w-2xl mx-auto`}
           >
-            <div className={`text-lg sm:text-xl font-semibold mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+            <div className={`text-xl font-semibold mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>
               🎓 Rice University • Computer Science + Business Double Major
             </div>
             <div className="flex items-center justify-center gap-2 mb-2">
-              <span className={`text-sm sm:text-base ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+              <span className={`text-base ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
                 GPA:
               </span>
-              <span className="text-xl sm:text-2xl font-bold text-indigo-600">
+              <span className="text-2xl font-bold text-indigo-600">
                 3.85
               </span>
             </div>
-            <div className={`text-xs sm:text-sm ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
+            <div className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
               Expected Graduation: 2027 • Languages: English, Urdu, Spanish
             </div>
           </motion.div>

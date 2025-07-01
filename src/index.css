@@ -92,49 +92,15 @@ All colors MUST be HSL.
 @layer base {
   * {
     @apply border-border;
-    /* Ensure no element creates horizontal overflow */
-    box-sizing: border-box;
-  }
-
-  html, body {
-    /* Prevent horizontal scrolling completely */
-    overflow-x: hidden;
-    width: 100%;
-    margin: 0;
-    padding: 0;
   }
 
   body {
     @apply bg-background text-foreground font-sans;
     font-feature-settings: "rlig" 1, "calt" 1;
-    /* Enable smooth scrolling */
-    scroll-behavior: smooth;
-    /* Improve text rendering on mobile */
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-  
-  /* Ensure root div takes full width without any margins */
-  #root {
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
   }
   
   h1, h2, h3, h4, h5, h6 {
     @apply font-display;
-  }
-
-  /* Improve touch targets on mobile */
-  button, a, input, textarea, select {
-    @apply touch-manipulation;
-  }
-
-  /* Ensure minimum touch target size */
-  button, a[role="button"], input[type="button"], input[type="submit"] {
-    min-height: 44px;
-    min-width: 44px;
   }
 }
 
@@ -142,29 +108,14 @@ All colors MUST be HSL.
   .text-balance {
     text-wrap: balance;
   }
-
-  /* Mobile-specific utilities */
-  .touch-manipulation {
-    touch-action: manipulation;
-  }
-
-  /* Prevent zoom on input focus (iOS) */
-  @supports (-webkit-touch-callout: none) {
-    input, textarea, select {
-      font-size: 16px;
-    }
-  }
 }
 
 /* Smooth scrolling */
 html {
   scroll-behavior: smooth;
-  /* Prevent horizontal scroll */
-  overflow-x: hidden;
-  width: 100%;
 }
 
-/* Custom scrollbar - hide on mobile for better UX */
+/* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -181,14 +132,6 @@ html {
   @apply bg-gray-400 dark:bg-gray-500;
 }
 
-/* Mobile scrollbar - hide for cleaner look */
-@media (max-width: 768px) {
-  ::-webkit-scrollbar {
-    width: 0px;
-    background: transparent;
-  }
-}
-
 /* Reduce motion for accessibility */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -198,55 +141,4 @@ html {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
-}
-
-/* iOS specific fixes */
-@supports (-webkit-touch-callout: none) {
-  /* Fix iOS viewport units */
-  .min-h-screen {
-    min-height: -webkit-fill-available;
-  }
-
-  /* Prevent rubber band scrolling */
-  body {
-    overscroll-behavior: none;
-  }
-}
-
-/* Android Chrome specific fixes */
-@media screen and (max-width: 768px) {
-  /* Prevent zoom on form inputs */
-  input[type="color"],
-  input[type="date"],
-  input[type="datetime"],
-  input[type="datetime-local"],
-  input[type="email"],
-  input[type="month"],
-  input[type="number"],
-  input[type="password"],
-  input[type="search"],
-  input[type="tel"],
-  input[type="text"],
-  input[type="time"],
-  input[type="url"],
-  input[type="week"],
-  select:focus,
-  textarea {
-    font-size: 16px;
-  }
-}
-
-/* Improve performance on mobile */
-@media (max-width: 768px) {
-  * {
-    /* Reduce GPU usage on mobile but prevent horizontal overflow */
-    transform: translateZ(0);
-    backface-visibility: hidden;
-    perspective: 1000px;
-  }
-}
-
-/* Additional overflow protection */
-.container, main, section, div {
-  overflow-x: hidden;
 }
